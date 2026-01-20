@@ -7,4 +7,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="DatabaseScripts\" />
+    <Folder Include="Mierentuin\Exceptions\" />
+    <Folder Include="Design\" />
+  </ItemGroup>
+
 </Project>
