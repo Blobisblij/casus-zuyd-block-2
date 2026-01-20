@@ -1,4 +1,5 @@
-﻿using System;
+﻿using casus.Mierentuin.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -8,7 +9,9 @@ namespace casus.Mierentuin
     {
         public static void Main()
         {
-            Console.WriteLine("Main Method");
+            Dieren Willem = new Dieren("wouws");
+            Willem.doenaam();
+            
         }
     }
 }
