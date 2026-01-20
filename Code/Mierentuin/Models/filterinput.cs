@@ -4,8 +4,7 @@ using System.Text;
 
 namespace casus.Mierentuin.Models
 {
-    internal class @interface
+    internal class filterinput
     {
-
     }
 }

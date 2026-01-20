@@ -25,5 +25,12 @@ namespace casus.Mierentuin.Models
         {   get { return functie; }
             private set { functie = value; }
         }
+
+        public Werknemer(string naam,string functie)
+        {
+            this.naam = naam;
+            this.functie = functie;
+            werknemerid=0;
+        }
     }
 }

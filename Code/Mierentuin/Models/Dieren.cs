@@ -4,7 +4,7 @@ using System.Text;
 
 namespace casus.Mierentuin.Models
 {
-    internal class Dieren
+    public class Dieren
     {
         public string Naam;
 
