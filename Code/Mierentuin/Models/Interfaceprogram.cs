@@ -50,7 +50,7 @@ namespace casus.Mierentuin.Models
                 }
                 Console.Write(inputprompt);
                 int intinvoer = notintvanger();
-                if (0 < intinvoer || opties.Count >= intinvoer)
+                if (0 < intinvoer && opties.Count >= intinvoer)
                 {
                     keuze = intinvoer;
                     Interfaceactief = false;
