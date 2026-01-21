@@ -23,15 +23,8 @@ namespace casus.Mierentuin
             List<string> testopties = new List<string>() { "doe dit","NU DIT" };
             List<Func<bool>> testoptiemethodes = new List<Func<bool>>() { testopbject.test1,testopbject.test1 };
 
-            Interfaceprogram Testinterface = new Interfaceprogram(jens, testoptiemethodes, testopties, "fout", "doe hier invoeren neef");
-            Testinterface.Startinterface("boe");
-
-            bool loginsucces = false;
-            while (loginsucces = false)
-            {
-
-            }
-
+            Interfaceprogram Testinterface = new Interfaceprogram(jens,testoptiemethodes, testopties, "fout", "doe hier invoeren neef");
+            Testinterface.Startinterface();
 
 
         }
