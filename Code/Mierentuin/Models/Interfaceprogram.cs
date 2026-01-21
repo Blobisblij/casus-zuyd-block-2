@@ -35,14 +35,14 @@ namespace casus.Mierentuin.Models
             this.inputprompt = inputprompt;
             functielijst = new List<Func<bool>>();
         }
-        public int Startinterface()
+        public int Startinterface(string errormsg)
         {
             bool Interfaceactief = true;
             int keuze = 0;
 
             while (Interfaceactief == true)
             {
-                int optienummer = 1;
+                int optienummer = 0;
                 foreach (string optie in opties)
                 {
                     Console.WriteLine($"{optienummer}: {optie}");

@@ -17,7 +17,7 @@ namespace casus.Mierentuin
 
             Interfaceprogram startpagina = new Interfaceprogram(jens, opties, "fout oen", "doe hier type:");
 
-            startpagina.Startinterface();
+            startpagina.Startinterface("invoer moet een getal zijn");
             
         }
     }
