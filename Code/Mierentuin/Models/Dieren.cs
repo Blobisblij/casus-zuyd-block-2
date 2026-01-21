@@ -1,4 +1,5 @@
-﻿using System;
+﻿using casus.Mierentuin.DataAccess;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -7,6 +8,7 @@ namespace casus.Mierentuin.Models
     public class Dieren
     {
         public string Naam;
+        public readonly int DierID;
 
         public Dieren(string Naam)
         {
@@ -16,6 +18,16 @@ namespace casus.Mierentuin.Models
         public void doenaam()
         {
             Console.WriteLine(Naam);
+        }
+
+        public void CreateDierenData()
+
+        {
+
+            DALSQL dalSql = new DALSQL();
+
+            dalSql.AddDier(this);
+
         }
     }
 }

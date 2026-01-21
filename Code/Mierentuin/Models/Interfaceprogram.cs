@@ -35,21 +35,31 @@ namespace casus.Mierentuin.Models
             this.inputprompt = inputprompt;
             functielijst = new List<Func<bool>>();
         }
-        public int Startinterface(string errormsg)
+        public void Startinterface(string errormsg)
         {
             bool Interfaceactief = true;
             int keuze = 0;
 
             while (Interfaceactief == true)
             {
-                int optienummer = 0;
+                int optienummer = 1;
                 foreach (string optie in opties)
                 {
                     Console.WriteLine($"{optienummer}: {optie}");
                     optienummer = optienummer + 1;
                 }
                 Console.Write(inputprompt);
-                int intinvoer = notintvanger();
+                //int intinvoer = notintvanger();
+                string inputstring = Console.ReadLine();
+                int intinvoer;
+                try
+                {
+                    intinvoer = int.Parse(inputstring);
+                }
+                catch (System.FormatException)
+                {
+                    intinvoer = -1;
+                }
                 if (0 < intinvoer && opties.Count >= intinvoer)
                 {
                     keuze = intinvoer;
@@ -60,27 +70,14 @@ namespace casus.Mierentuin.Models
                     Console.WriteLine(errormsg);
                 }
             }
-            return keuze;
+             execkeuze(keuze);
         }
 
-        public int notintvanger()
+        private void execkeuze(int keuze)
         {
-            bool intcorrect = false;
-            int intinput = 0;
-            while (intcorrect == false)
-            {
-                string inputstring = Console.ReadLine();
-                try
-                {
-                    intinput = int.Parse(inputstring);
-                    intcorrect = true;
-                }
-                catch (System.FormatException)
-                {
-                    intcorrect = false;
-                }
-            }
-            return intinput;
+            bool succes = functielijst[keuze-1]();
         }
+
+        
     }
 }
