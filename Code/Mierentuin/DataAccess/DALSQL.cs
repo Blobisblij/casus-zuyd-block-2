@@ -69,7 +69,7 @@ namespace casus.Mierentuin.DataAccess
         }
 
                 */
-        public void AddDier(Dieren Dier)
+        public void AddDier(Dier Dier)
 
     {
 

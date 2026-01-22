@@ -11,7 +11,8 @@ namespace casus.Mierentuin.Models
 
         public VerblijfsSchema(string naam, List<SchoonMaakBeurt> schema)
         {
-            
+            this.naam = naam;
+            this.schema = schema;
         }
 
         public bool VoltookSchoonmaakBeurt()

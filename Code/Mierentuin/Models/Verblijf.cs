@@ -11,6 +11,15 @@ namespace casus.Mierentuin.Models
         public string beschrijving;
         private List<int> afmetingen;
         public bool poortopen;
-        private List<Dieren> diereninverblijf;
+        private List<Dier> diereninverblijf;
+
+        public Verblijf(string naam, string beschrijving, List<int> afmetingen, int verblijf)
+        {
+            this.naam = naam;
+            this.beschrijving = beschrijving;
+            this.afmetingen = afmetingen;
+            this.verblijfid = verblijf;
+            poortopen = false;
+        }
     }
 }
