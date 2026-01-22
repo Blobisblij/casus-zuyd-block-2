@@ -51,7 +51,7 @@ namespace casus.Mierentuin.Models
             bool Interfaceactief = true;
             int keuze = 0;
 
-            while (Interfaceactief == true)
+            while (Interfaceactief)
             {
                 int optienummer = 1;
                 foreach (string optie in opties)
@@ -65,17 +65,12 @@ namespace casus.Mierentuin.Models
                 try
                 {
                     intinvoer = int.Parse(inputstring);
+                    if (0 < intinvoer && opties.Count >= intinvoer){
+                        keuze = intinvoer;
+                        Interfaceactief = false;
+                    }
                 }
                 catch (System.FormatException)
-                {
-                    intinvoer = -1;
-                }
-                if (0 < intinvoer && opties.Count >= intinvoer)
-                {
-                    keuze = intinvoer;
-                    Interfaceactief = false;
-                }
-                else
                 {
                     Console.WriteLine(errormsg);
                 }
