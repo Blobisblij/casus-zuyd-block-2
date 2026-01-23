@@ -1,7 +1,5 @@
 ﻿using casus.Mierentuin.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Runtime.CompilerServices;
 
 namespace casus.Mierentuin
 {
@@ -9,16 +7,26 @@ namespace casus.Mierentuin
     {
         public static void Main()
         {
-            Dieren Willem = new Dieren("wouws");
+            Dier Willem = new Dier("wouws","","Koe");
             Willem.doenaam();
             List<string> opties = new List<string>() { "keuze 1", "keuze 2", "keuze 3" };
 
             Werknemer jens = new Werknemer("jens", "Dierenverzorger");
 
+            /*
             Interfaceprogram startpagina = new Interfaceprogram(jens, opties, "fout oen", "doe hier type:");
 
-            startpagina.Startinterface();
-            
+            startpagina.Startinterface("invoer moet een getal zijn")
+                */
+
+            Testclass testopbject = new Testclass(2);
+            List<string> testopties = new List<string>() { "doe dit","NU DIT" };
+            List<Func<bool>> testoptiemethodes = new List<Func<bool>>() { testopbject.test1,testopbject.test1 };
+
+            Interfaceprogram Testinterface = new Interfaceprogram(jens,testoptiemethodes, testopties, "fout", "doe hier invoeren neef");
+            Testinterface.Startinterface();
+
+
         }
     }
 }
