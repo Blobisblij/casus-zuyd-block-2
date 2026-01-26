@@ -7,7 +7,7 @@ namespace casus.Mierentuin
     {
         public static void Main()
         {
-            Dier Willem = new Dier("wouws","","Koe");
+            /*Dier Willem = new Dier("wouws","","Koe");
             Willem.doenaam();
             List<string> opties = new List<string>() { "keuze 1", "keuze 2", "keuze 3" };
 
@@ -18,13 +18,26 @@ namespace casus.Mierentuin
 
             startpagina.Startinterface("invoer moet een getal zijn")
                 */
-
+            
             Testclass testopbject = new Testclass(2);
-            List<string> testopties = new List<string>() { "doe dit","NU DIT" };
-            List<Func<bool>> testoptiemethodes = new List<Func<bool>>() { testopbject.test1,testopbject.test1 };
+            //List<string> testopties = new List<string>() { "doe dit","NU DIT" };
+            //List<Func<bool>> testoptiemethodes = new List<Func<bool>>() { testopbject.test1,testopbject.test1 };
 
-            Interfaceprogram Testinterface = new Interfaceprogram(jens,testoptiemethodes, testopties, "fout", "doe hier invoeren neef");
-            Testinterface.Startinterface();
+            //Interfaceprogram Testinterface = new Interfaceprogram(jens,testoptiemethodes, testopties, "fout", "doe hier invoeren neef");
+            //Testinterface.Startinterface();*/
+
+            List<Func<bool>> keuzefunctie = new List<Func<bool>>()
+            {
+                testopbject.test1 
+                
+                
+            };
+
+            List<string> keuzestrings = new List<string>()
+            {
+                
+            };
+
 
 
         }

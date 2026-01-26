@@ -10,11 +10,24 @@ namespace casus.Mierentuin.Models
         public string Naam;
         public readonly int DierID;
         private string typedier;
+
+        public string Typedier
+        {
+            get { return typedier; }
+        }
         public string Notitie;
         
 
         public Dier(string Naam, string Notitie, string typedier)
         {
+            this.Naam = Naam;
+            this.Notitie = Notitie;
+            this.typedier = typedier;
+        }
+
+        public Dier(int DierID, string Naam, string Notitie, string typedier)
+        {
+            this.DierID = DierID;
             this.Naam = Naam;
             this.Notitie = Notitie;
             this.typedier = typedier;
