@@ -7,7 +7,7 @@ namespace casus.Mierentuin
     {
         public static void Main()
         {
-            Dieren Willem = new Dieren("wouws");
+            Dier Willem = new Dier("wouws","","Koe");
             Willem.doenaam();
             List<string> opties = new List<string>() { "keuze 1", "keuze 2", "keuze 3" };
 
