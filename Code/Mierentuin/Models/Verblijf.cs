@@ -4,22 +4,25 @@ using System.Text;
 
 namespace casus.Mierentuin.Models
 {
-    internal class Verblijf
+    public class Verblijf
     {
-        private int verblijfid;
-        private string naam;
-        public string beschrijving;
-        private List<int> afmetingen;
-        public bool poortopen;
-        private List<Dier> diereninverblijf;
+        public int Verblijfid{get;set;}
+        public string Naam{get;set;}
+        public string Beschrijving;
+        public bool PoortOpen;
+        public List<Dier> DiereninVerblijf{get;set;}
 
-        public Verblijf(string naam, string beschrijving, List<int> afmetingen, int verblijf)
+        public Verblijf(string Naam, string Beschrijving)
         {
-            this.naam = naam;
-            this.beschrijving = beschrijving;
-            this.afmetingen = afmetingen;
-            this.verblijfid = verblijf;
-            poortopen = false;
+            this.Naam = Naam;
+            this.Beschrijving = Beschrijving;
+            PoortOpen = false;
+        }
+        public Verblijf(int Verblijfid,string Naam, string Beschrijving,bool PoortOpen){
+            this.Verblijfid = Verblijfid;
+            this.Naam = Naam;
+            this.Beschrijving = Beschrijving;
+            this.PoortOpen = PoortOpen;
         }
     }
 }

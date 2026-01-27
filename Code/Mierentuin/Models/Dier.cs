@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
+
+
 namespace casus.Mierentuin.Models
 {
     public class Dier
@@ -10,6 +12,13 @@ namespace casus.Mierentuin.Models
         public string Naam;
         public readonly int DierID;
         private string typedier;
+        private int verblijfID;
+
+        public int VerblijfID
+        {
+            get { return verblijfID; }
+            set { verblijfID = value; }
+        }
 
         public string Typedier
         {
@@ -25,12 +34,13 @@ namespace casus.Mierentuin.Models
             this.typedier = typedier;
         }
 
-        public Dier(int DierID, string Naam, string Notitie, string typedier)
+        public Dier(int DierID, string Naam, string Notitie, string typedier, int verblijfID)
         {
             this.DierID = DierID;
             this.Naam = Naam;
             this.Notitie = Notitie;
             this.typedier = typedier;
+            this.verblijfID = verblijfID;
         }
 
         public void doenaam()
@@ -38,11 +48,6 @@ namespace casus.Mierentuin.Models
             Console.WriteLine(Naam);
         }
 
-        public void CreateDierenData()
-        {
-            DALSQL dalSql = new DALSQL();
 
-            dalSql.AddDier(this);
-        }
     }
 }

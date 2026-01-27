@@ -18,5 +18,12 @@ namespace casus.Mierentuin.Models
             Console.WriteLine("Doet Het!");
             return true;
         }
+
+        public bool UnderConstruction(Func<bool> schermterug)
+        {
+            Console.WriteLine("under construction\n\n\n\n\n\n\n\n");
+            schermterug();
+            return true;
+        }
     }
 }

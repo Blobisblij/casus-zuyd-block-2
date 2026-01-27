@@ -10,148 +10,327 @@ namespace casus.Mierentuin.DataAccess
     public class DALSQL
 
     {
+        private static string webserver = ".";
 
-        private string webserver;
+        private static string database = "Mierentuin";
 
-        private string database;
-
-        private readonly string connectionString;
-
-
-
-        public DALSQL()
-
-        {
-
-            webserver = ".";
-
-            database = "Mierentuin";
-
-            connectionString = $"Server={webserver};Database={database};Trusted_Connection=True;TrustServerCertificate=True;";
-
-        }
-
-        // voor elk object wat naar de database geschreven kan worden moet er een van deze methodes gemaakt worden
-
-        /*        public void Add{objectnaam}(Class naam)
-
-            {
-
-             string query = "INSERT INTO [tabel naam] (waarde, waarde) VALUES (@colom, @colom)";
+        public static string connectionString =
+            $"Server={webserver};Database={database};Trusted_Connection=True;TrustServerCertificate=True;";
 
 
-             using SqlConnection connection = new SqlConnection(connectionString);
+        #region Dieren
 
-             using SqlCommand command = new SqlCommand(query, connection);
-
-
-             command.Parameters.AddWithValue("@colom", naam.waarde);
-
-             command.Parameters.AddWithValue("@colom", naam.waarde);
-
-
-             connection.Open();
-
-             command.ExecuteNonQuery();
-
-             }
-
-        ook moet er in de class van het object wat je naar de database wil stuuren deze methode nodig
-
-        public void CreateClassNaamData()
+        public static void Adddata(Dier Dier)
 
         {
 
-            DALSQL dalSql = new DALSQL();
-
-            dalSql.AddClassNaam(this);
-
-        }
-
-                */
-        public void AddDier(Dier Dier)
-
-    {
-
-     string query = "INSERT INTO Dieren (Naam, DierID) VALUES (@Naam, @DierID)";
+            string query =
+                "INSERT INTO Dieren (Naam,Typedier,Notitie,Verblijfid) VALUES (@Naam, @DierID,@Notitie,@VerblijfID)";
 
 
-     using SqlConnection connection = new SqlConnection(connectionString);
+            using SqlConnection connection = new SqlConnection(connectionString);
 
-     using SqlCommand command = new SqlCommand(query, connection);
-
-
-     command.Parameters.AddWithValue("@Naam", Dier.Naam);
-
-     command.Parameters.AddWithValue("@DierID", Dier.DierID);
+            using SqlCommand command = new SqlCommand(query, connection);
 
 
-     connection.Open();
+            command.Parameters.AddWithValue("@Naam", Dier.Naam);
 
-     command.ExecuteNonQuery();
+            command.Parameters.AddWithValue("@Typedier", Dier.Typedier);
 
-    }
+            command.Parameters.AddWithValue("@Notitie", Dier.Notitie);
 
-        /*
-         Select code Moet ook per class aangepast worden
-          
-         public List<ClassNaam> GetAllClassNaam()
-
-    {
-
-        string query = "SELECT colom, colom, colom FROM Tabel";
-
-        List<ClassNaam> naam = new List<ClassNaam>();
-
-
-        using (SqlConnection connection = new SqlConnection(connectionString))
-
-        using (SqlCommand command = new SqlCommand(query, connectionString))
-
-        {
+            command.Parameters.AddWithValue("@VerblijfID", Dier.VerblijfID);
 
             connection.Open();
 
-            using (SqlDataReader reader = command.ExecuteReader())
+            command.ExecuteNonQuery();
+
+        }
+
+        public static List<Dier> GetAllDieren()
+        {
+            string query = "SELECT * FROM Dieren";
+            List<Dier> Dierlist = new List<Dier>();
+
+            using SqlConnection connection = new SqlConnection(connectionString);
+
+            using SqlCommand command = new SqlCommand(query, connection);
 
             {
 
-                while (reader.Read())
+                connection.Open();
+
+                using (SqlDataReader reader = command.ExecuteReader())
 
                 {
 
-                    DataType Tabel = reader.GetInt32(0);
 
-                    DataType Tabel = reader.GetString(1);
+                    while (reader.Read())
 
-                    DataType Tabel = reader.GetDecimal(2);
+                    {
+
+                        int Dierid = reader.GetInt32(0);
+
+                        int VerblijfID = reader.GetInt32(0);
+
+                        string naam = reader.GetString(0);
+
+                        string DierType = reader.GetString(0);
+
+                        string Notitie = reader.GetString(0);
 
 
-                    var naam = new ClassNaam(Tabel, Tabel);
+                        Dier Dier = new Dier(Dierid, naam, Notitie, DierType, VerblijfID);
 
 
-                    listnaam.Add(naam);
+                        Dierlist.Add(Dier);
+
+                    }
 
                 }
 
             }
 
+
+            return Dierlist;
+
         }
 
+        #endregion
 
-        return listnaam;
+        #region Werknemers
 
-    }
-        
-         ook moet er in de class zelf dit als methode toegevoegd worden
+        public static void Adddata(Werknemer werknemer)
 
-            public List<ClassNaam> GetAllClassNaam()
+        {
 
-    {
+            string query = "INSERT INTO Werknemers (Naam,Functie) VALUES (@Naam, @Functie)";
 
-        //Maak hier de bijbehorende logica om via de DALSQL alle producten op te halen.
 
-    }
-         */
+            using SqlConnection connection = new SqlConnection(connectionString);
+
+            using SqlCommand command = new SqlCommand(query, connection);
+
+
+            command.Parameters.AddWithValue("@Naam", werknemer.Naam);
+
+            command.Parameters.AddWithValue("@Functie", werknemer.Functie);
+
+            connection.Open();
+
+            command.ExecuteNonQuery();
+
+        }
+
+        public static List<Werknemer> GetAllWerknemers()
+        {
+            string query = "SELECT * FROM Werknemers";
+            List<Werknemer> werknemers = new List<Werknemer>();
+
+            using SqlConnection connection = new SqlConnection(connectionString);
+
+            using SqlCommand command = new SqlCommand(query, connection);
+
+            {
+
+                connection.Open();
+
+                using (SqlDataReader reader = command.ExecuteReader())
+
+                {
+
+
+                    while (reader.Read())
+
+                    {
+
+                        int WerknemerID = reader.GetInt32(0);
+
+                        string naam = reader.GetString(0);
+
+                        string Functie = reader.GetString(0);
+
+                        Werknemer werknemer = new Werknemer(WerknemerID, naam, Functie);
+
+
+                        werknemers.Add(werknemer);
+
+                    }
+
+                }
+
+            }
+
+
+            return werknemers;
+
+        }
+
+        #endregion
+
+        #region Verblijf
+
+        public static void Adddata(Verblijf verblijf)
+
+        {
+
+            string query = "INSERT INTO Verblijf (Naam,Beschrijving) VALUES (@Naam, @Beschrijving)";
+
+
+            using SqlConnection connection = new SqlConnection(connectionString);
+
+            using SqlCommand command = new SqlCommand(query, connection);
+
+
+            command.Parameters.AddWithValue("@Naam", verblijf.Naam);
+
+            command.Parameters.AddWithValue("@Beschrijving", verblijf.Beschrijving);
+
+            connection.Open();
+
+            command.ExecuteNonQuery();
+
+        }
+
+        public static List<Verblijf> GetAllVerblijf()
+        {
+            string query = "SELECT * FROM Verblijf";
+            List<Verblijf> verblijflijst = new List<Verblijf>();
+
+            using SqlConnection connection = new SqlConnection(connectionString);
+
+            using SqlCommand command = new SqlCommand(query, connection);
+
+            {
+
+                connection.Open();
+
+                using (SqlDataReader reader = command.ExecuteReader())
+
+                {
+
+
+                    while (reader.Read())
+
+                    {
+
+                        int verblijfID = reader.GetInt32(0);
+
+                        string naam = reader.GetString(0);
+
+                        string beschrijving = reader.GetString(0);
+
+                        bool poortopten = reader.GetBoolean(1);
+
+                        Verblijf verblijf = new Verblijf(verblijfID, naam, beschrijving, poortopten);
+
+
+                        verblijflijst.Add(verblijf);
+
+                    }
+
+                }
+
+            }
+
+
+            return verblijflijst;
+
+        }
+
+        #endregion
+
+
+        #region VoerBeurt
+
+        public static void Adddata(VoerBeurt voerbeurt)
+
+        {
+
+            string query =
+                "INSERT INTO VoerBeurt (Typevoer,HoeveelheidVoer,Tijdstip,VerblijfID,Voltooid) VALUES (@Typevoer,@HoeveelheidVoer,@Tijdstip,@VerblijfID,@Voltooid)";
+
+
+            using SqlConnection connection = new SqlConnection(connectionString);
+
+            using SqlCommand command = new SqlCommand(query, connection);
+
+
+            command.Parameters.AddWithValue("@Naam", voerbeurt.Typevoer);
+
+            command.Parameters.AddWithValue("@Beschrijving", voerbeurt.Hoeveelheidvoer);
+
+            command.Parameters.AddWithValue("@Tijdstip", voerbeurt.Tijdstip);
+
+            command.Parameters.AddWithValue("VerblijfID", voerbeurt.Verblijf.Verblijfid);
+
+            command.Parameters.AddWithValue("Tijdstip", voerbeurt.Tijdstip);
+
+            command.Parameters.AddWithValue("Voltooid", voerbeurt.Voltooid);
+
+            connection.Open();
+
+            command.ExecuteNonQuery();
+
+        }
+
+        public static List<VoerBeurt> GetAllVoerbeurt()
+        {
+            string query = "SELECT * FROM VoerBeurt";
+            List<VoerBeurt> Voerbeurten = new List<VoerBeurt>();
+
+            using SqlConnection connection = new SqlConnection(connectionString);
+
+            using SqlCommand command = new SqlCommand(query, connection);
+
+            {
+
+                connection.Open();
+
+                using (SqlDataReader reader = command.ExecuteReader())
+
+                {
+
+
+                    while (reader.Read())
+
+                    {
+
+                        int VerblijfID = reader.GetInt32(0);
+
+                        string Naam = reader.GetString(0);
+
+                        string Typevoer = reader.GetString(1);
+
+                        int HoeveelheidVoer = reader.GetInt32(0);
+
+                        DateTime Tijdstip = reader.GetDateTime(1);
+
+                        string Beschrijving = reader.GetString(0);
+
+                        bool Voltooid = reader.GetBoolean(1);
+
+                        VoerBeurt Voerbeurt = new VoerBeurt(Typevoer, Tijdstip, HoeveelheidVoer, Voltooid);
+
+
+
+                        Voerbeurten.Add(Voerbeurt);
+
+                    }
+
+                }
+
+            }
+
+
+            return Voerbeurten;
+
+            #endregion
+
+            #region SchoonMaakBeurt
+
+            #endregion
+
+        }
     }
 }

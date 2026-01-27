@@ -4,7 +4,7 @@ using System.Text;
 
 namespace casus.Mierentuin.Models
 {
-    internal class Werknemer
+    public class Werknemer
     {
         private int werknemerid;
         public int Werknemerid 
@@ -31,6 +31,13 @@ namespace casus.Mierentuin.Models
             this.naam = naam;
             this.functie = functie;
             werknemerid=0;
+        }
+        
+        public Werknemer(int werknemerid,string naam,string functie)
+        {
+            this.naam = naam;
+            this.functie = functie;
+            this.werknemerid=werknemerid;
         }
     }
 }
