@@ -15,9 +15,22 @@ namespace casus.Mierentuin.Models
             this.schema = schema;
         }
         
-        public bool VoltooiBeurt()
+        public List<VoerBeurt> WerknemerWerkSchema(Werknemer  werknemer)
         {
-            return true;
+            List<VoerBeurt> VoerbeurtvanWerknemer = new List<VoerBeurt>();
+            foreach (VoerBeurt voerbeurt in schema)
+            {
+                foreach (Werknemer Voerbeurtwerknemer in voerbeurt.Werknemers)
+                {
+                    if (Voerbeurtwerknemer == werknemer)
+                    {
+                        VoerbeurtvanWerknemer.Add(voerbeurt);
+                    }
+                }
+            }
+            return VoerbeurtvanWerknemer;
         }
+        
+        
     }
 }

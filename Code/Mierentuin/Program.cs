@@ -20,10 +20,10 @@ namespace casus.Mierentuin
             Werknemer Hans = new Werknemer("Hans", "MamagerDierenverzorgers");
 
             List<Werknemer> werknemers = new List<Werknemer>() { sam, Pieter, ayman };
-
+            staticvorigmenu vorig = new staticvorigmenu();
             //startscherm
             //Maneger Dierenverzorgers
-            string ManagerDierenverzorgerprompt = "";
+            string ManagerDierenverzorgerprompt = "";    Interfaceprogram vorigmenu;
             string ManagerDierenverzorgerErrormsg = "";
             List<string> MenukeuzesmanagerDierenverzorger = new List<string>()
             {
@@ -67,10 +67,11 @@ namespace casus.Mierentuin
                 MenuFuncVerblijfsmedewerker, MenukeuzesVerblijfsmedewerker, VerblijfsmedewerkerErrormsg,
                 Verblijfsmedewerkerprompt);
             //Dierenverzorger
-            string Dierenverzorgerprompt = "";
-            string DierenverzorgerErrormsg = "";
+            string Dierenverzorgerprompt = "hoi hallo";
+            string DierenverzorgerErrormsg = "fout lul";
             List<string> MenukeuzesDierenverzorger = new List<string>()
             {
+                "Stop het programma",
                 "Begin aan jou werkschema.",
                 "Dieren Inzien/Bewerken.",
                 "Verblijven inzien/Bewerken."
@@ -78,6 +79,8 @@ namespace casus.Mierentuin
 
             List<Func<bool>> MenuFuncDierenverzorger = new List<Func<bool>>()
             {
+                Interfaceprogram.Stopinterface,
+                vorig.terug
                 
             };
             Interfaceprogram Dierenverzorgerinterface = new Interfaceprogram(MenuFuncDierenverzorger,MenukeuzesDierenverzorger,DierenverzorgerErrormsg,Dierenverzorgerprompt);
@@ -85,7 +88,7 @@ namespace casus.Mierentuin
             List<string> naamenfunctie = new List<string>();
             foreach (Werknemer werknemer in werknemers)
             {
-                string naamfunctie = $"{werknemer.Naam}             {werknemer.Functie}";
+                string naamfunctie = $"{werknemer.Naam}_____{werknemer.Functie}";
                 naamenfunctie.Add(werknemer.Naam);
             }
             //checkt de functie van de gebruiker en geeft het correcte vervolg interface
@@ -116,12 +119,7 @@ namespace casus.Mierentuin
             Interfaceprogram Loginmenu = new Interfaceprogram(NotLoggedIn, Loginfunc, naamenfunctie,
                 "Typ een getal wat binnen de gegeven waarden valt",
                 "Typ het getal wat voor de gebruiker staat waarmee u wil inloggen:");
-            Interfaceprogram Terug = Loginmenu;
-            Loginmenu.Startinterface();
-
-
-
-
+            vorig.setterug(Loginmenu);
         }
     }
 }
