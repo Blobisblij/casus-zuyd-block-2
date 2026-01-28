@@ -32,7 +32,7 @@ namespace casus.Mierentuin
 
             List<Func<bool>> MenuFuncManagerDierenverzorger = new List<Func<bool>>()
             {
-
+                
             };
             
 
@@ -46,7 +46,7 @@ namespace casus.Mierentuin
 
             List<Func<bool>> MenuFuncVerblijfsmagager = new List<Func<bool>>()
             {
-
+                
             };
             //verblijfsmedewerler
             string Verblijfsmedewerkerprompt = "";
@@ -58,21 +58,22 @@ namespace casus.Mierentuin
 
             List<Func<bool>> MenuFuncVerblijfsmedewerker = new List<Func<bool>>()
             {
-
+                
             };
             //Dierenverzorger
             string Dierenverzorgerprompt = "";
             string DierenverzorgerErrormsg = "";
             List<string> MenukeuzesDierenverzorger = new List<string>()
             {
-                
+                "Begin aan jou werkschema.",
+                "Dieren Inzien/Bewerken.",
+                "Verblijven inzien/Bewerken."
             };
 
             List<Func<bool>> MenuFuncDierenverzorger = new List<Func<bool>>()
             {
-
+                
             };
-            
             //maakt een list van alle users
             List<string> naamenfunctie = new List<string>();
             foreach (Werknemer werknemer in werknemers)
@@ -112,6 +113,7 @@ namespace casus.Mierentuin
             Interfaceprogram Loginmenu = new Interfaceprogram(NotLoggedIn, Loginfunc, naamenfunctie,
                 "Typ een getal wat binnen de gegeven waarden valt",
                 "Typ het getal wat voor de gebruiker staat waarmee u wil inloggen:");
+            
             Loginmenu.Startinterface();
 
 

@@ -27,6 +27,7 @@ namespace casus.Mierentuin.Models
 {
     internal class Interfaceprogram
     {
+        public Interfaceprogram Vorigmenu;
         private Werknemer user;
         public Werknemer Werknemer
         {
@@ -92,10 +93,18 @@ namespace casus.Mierentuin.Models
             return true;
         }
 
+        public bool GaTerugInterface()
+        {
+            Vorigmenu.startinterface();
+            return true;
+        }
+        
         public bool Stopinterface()
         {
             return true;
         }
+        
+        
         
         
     }
