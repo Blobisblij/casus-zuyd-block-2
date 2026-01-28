@@ -25,7 +25,7 @@ using casus.Mierentuin.DataAccess;
  **/
 namespace casus.Mierentuin.Models
 {
-    internal class Interfaceprogram
+    public class Interfaceprogram
     {
         public Interfaceprogram Vorigmenu;
         private Werknemer user;
@@ -91,6 +91,7 @@ namespace casus.Mierentuin.Models
 
         private void execkeuze(int keuze)
         {
+            
             bool succes = functielijst[keuze-1]();
         }
 
@@ -100,21 +101,10 @@ namespace casus.Mierentuin.Models
             startinterface();
             return true;
         }
-
-        public bool GaTerugInterface()
-        {
-            Vorigmenu.startinterface();
-            return true;
-        }
         
-        public bool Stopinterface()
+        public static bool Stopinterface()
         {
             return true;
         }
-        
-        
-        
-        
-        
     }
 }
