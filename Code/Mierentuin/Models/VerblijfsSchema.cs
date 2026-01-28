@@ -17,6 +17,7 @@ namespace casus.Mierentuin.Models
 
         public bool VoltookSchoonmaakBeurt()
         {
+            
             return true;
         }
     }
