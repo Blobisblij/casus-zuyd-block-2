@@ -17,7 +17,13 @@ namespace casus.Mierentuin.DataAccess
         public static string connectionString =
             $"Server={webserver};Database={database};Trusted_Connection=True;TrustServerCertificate=True;";
 
-
+// Insert en select scripts voor sql 
+// om een object te schijven naar sql moet je DALSQL.adddata(object) doen zorg er voor dat de opjecten gevuld zijn voordat je ze schijft
+// 
+//select gaat met alle van dat type 
+//dus als je alle dieren wil doe je DALSQL.GetAllDieren
+//als je een geen dieren wil verander je het woord met het ding wat je wel wil
+        
         #region Dieren
 
         public static void Adddata(Dier Dier)

@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using casus.Mierentuin.DataAccess;
-
+//dit is een van de hoofd classes omdat er zoveel bij een komt
+//probeer zo veel mogelijk vanuit hier te doen
 namespace casus.Mierentuin.Models
 {
     public class Verblijf

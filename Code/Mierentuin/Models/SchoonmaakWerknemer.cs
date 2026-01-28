@@ -1,5 +1,5 @@
 namespace casus.Mierentuin.Models;
-
+// deze klas word vooral gebruik voor de data dus eigelijk is het alleen de constructor
 public class SchoonmaakWerknemer
 {
     private int schoonmaakbeurtID;

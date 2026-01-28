@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 
 
-
+// deze klas word vooral gebruik voor de data dus eigelijk is het alleen de constructor
 namespace casus.Mierentuin.Models
 {
     public class Dier
