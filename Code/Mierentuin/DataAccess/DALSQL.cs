@@ -240,8 +240,7 @@ namespace casus.Mierentuin.DataAccess
 
         #endregion
 
-
-        #region VoerBeurt
+        #region voerbeurt
 
         public static void Adddata(VoerBeurt voerbeurt)
 
@@ -254,7 +253,6 @@ namespace casus.Mierentuin.DataAccess
             using SqlConnection connection = new SqlConnection(connectionString);
 
             using SqlCommand command = new SqlCommand(query, connection);
-
 
             command.Parameters.AddWithValue("@Naam", voerbeurt.Typevoer);
 
@@ -297,20 +295,18 @@ namespace casus.Mierentuin.DataAccess
                     {
 
                         int VerblijfID = reader.GetInt32(0);
-
-                        string Naam = reader.GetString(0);
-
-                        string Typevoer = reader.GetString(1);
+                        
+                        int VoerBeurtID = reader.GetInt32(0);
+                        
+                        string Typevoer = reader.GetString(0);
 
                         int HoeveelheidVoer = reader.GetInt32(0);
 
-                        DateTime Tijdstip = reader.GetDateTime(1);
+                        DateTime Tijdstip = reader.GetDateTime(0);
 
-                        string Beschrijving = reader.GetString(0);
+                        bool Voltooid = reader.GetBoolean(0);
 
-                        bool Voltooid = reader.GetBoolean(1);
-
-                        VoerBeurt Voerbeurt = new VoerBeurt(Typevoer, Tijdstip, HoeveelheidVoer, Voltooid);
+                        VoerBeurt Voerbeurt = new VoerBeurt(VoerBeurtID,Typevoer, Tijdstip, HoeveelheidVoer, Voltooid,VoerBeurtID);
 
 
 
@@ -321,16 +317,220 @@ namespace casus.Mierentuin.DataAccess
                 }
 
             }
-
-
             return Voerbeurten;
+        }
 
-            #endregion
+        #endregion
 
-            #region SchoonMaakBeurt
+        #region VoerBeurtWerknemer
 
-            #endregion
+        public static void Adddata(VoerBeurtWerknemer voerBeurtWerknemer)
+        {
+
+            string query =
+                "INSERT INTO VoerBeurtWerknemer (VoerbeurtID,WerknemerID) VALUES (@VoerBeurtID, @WerknemerID)";
+
+
+            using SqlConnection connection = new SqlConnection(connectionString);
+
+            using SqlCommand command = new SqlCommand(query, connection);
+
+
+            command.Parameters.AddWithValue("@VoerBeurtID", voerBeurtWerknemer.VoerBeurtID);
+
+            command.Parameters.AddWithValue("@WerknemerID", voerBeurtWerknemer.WerknemerID);
+
+            connection.Open();
+
+            command.ExecuteNonQuery();
 
         }
+
+        public static List<VoerBeurtWerknemer> GetAllVoerbeurtWerknemer()
+        {
+            string query = "SELECT * FROM VoerBeurtWerknemer";
+            List<VoerBeurtWerknemer> voerBeurtWerknemers = new List<VoerBeurtWerknemer>();
+
+            using SqlConnection connection = new SqlConnection(connectionString);
+
+            using SqlCommand command = new SqlCommand(query, connection);
+
+            {
+
+                connection.Open();
+
+                using (SqlDataReader reader = command.ExecuteReader())
+
+                {
+
+
+                    while (reader.Read())
+
+                    {
+
+                        int VoerBeurtID = reader.GetInt32(0);
+                        int WerknemerID = reader.GetInt32(0);
+
+                        VoerBeurtWerknemer voerBeurtWerknemer = new VoerBeurtWerknemer(VoerBeurtID, WerknemerID);
+
+
+
+                        voerBeurtWerknemers.Add(voerBeurtWerknemer);
+
+                    }
+
+                }
+
+            }
+            return voerBeurtWerknemers;
+        }
+        #endregion
+
+        #region SchoonmaakWerknemer
+        public static void Adddata(SchoonmaakWerknemer schoonmaakWerknemer)
+        {
+
+            string query =
+                "INSERT INTO SchoonmaakWerknemer (SchoonmaakbeurtID,WerknemerID) VALUES (@SchoonmaakBeurtID, @WerknemerID)";
+
+
+            using SqlConnection connection = new SqlConnection(connectionString);
+
+            using SqlCommand command = new SqlCommand(query, connection);
+
+
+            command.Parameters.AddWithValue("@VoerBeurtID", schoonmaakWerknemer.SchoonmaakBeurtID);
+
+            command.Parameters.AddWithValue("@WerknemerID", schoonmaakWerknemer.WerknemerID);
+
+            connection.Open();
+
+            command.ExecuteNonQuery();
+
+        }
+
+        public static List<SchoonmaakWerknemer> GetAllSchoonmaakWerknemer()
+        {
+            string query = "SELECT * FROM SchoonmaakWerknemer";
+            List<SchoonmaakWerknemer> schoonmaakWerknemers = new List<SchoonmaakWerknemer>();
+
+            using SqlConnection connection = new SqlConnection(connectionString);
+
+            using SqlCommand command = new SqlCommand(query, connection);
+
+            {
+
+                connection.Open();
+
+                using (SqlDataReader reader = command.ExecuteReader())
+
+                {
+
+
+                    while (reader.Read())
+
+                    {
+
+                        int SchoonmaakbeurtID = reader.GetInt32(0);
+                        int WerknemerID = reader.GetInt32(0);
+
+                        SchoonmaakWerknemer schoonmaakWerknemer = new SchoonmaakWerknemer(SchoonmaakbeurtID, WerknemerID);
+
+
+
+                        schoonmaakWerknemers.Add(schoonmaakWerknemer);
+
+                    }
+
+                }
+
+            }
+            return schoonmaakWerknemers;
+        }
+
+
+        #endregion
+
+        #region Schoonmaakbeurt
+
+        public static void Adddata(SchoonMaakBeurt schoonmaakbeurt)
+
+        {
+
+            string query =
+                "INSERT INTO SchoonMaakBeurt (schoonmaakID,tijdstip,verblijfID,voltooid) VALUES (@Naam, @DierID,@Notitie,@VerblijfID)";
+
+
+            using SqlConnection connection = new SqlConnection(connectionString);
+
+            using SqlCommand command = new SqlCommand(query, connection);
+
+
+            command.Parameters.AddWithValue("@schoonmaakID", schoonmaakbeurt.SchoonmaakBeurtID);
+
+            command.Parameters.AddWithValue("@tijdstip", schoonmaakbeurt.Tijdstip);
+
+            command.Parameters.AddWithValue("@verblijfID", schoonmaakbeurt.Verblijf.Verblijfid);
+
+            command.Parameters.AddWithValue("@voltooid", schoonmaakbeurt.Voltooid);
+
+            connection.Open();
+
+            command.ExecuteNonQuery();
+
+        }
+
+        public static List<SchoonMaakBeurt> GetAllSchoonMaakBeurt()
+        {
+            string query = "SELECT * FROM SchoonmaakBeurt";
+            List<SchoonMaakBeurt> SchoonMaakBeurten = new List<SchoonMaakBeurt>();
+
+            using SqlConnection connection = new SqlConnection(connectionString);
+
+            using SqlCommand command = new SqlCommand(query, connection);
+
+            {
+
+                connection.Open();
+
+                using (SqlDataReader reader = command.ExecuteReader())
+
+                {
+                    
+                    while (reader.Read())
+
+                    {
+
+                        int SchoonmaakBeurtID = reader.GetInt32(0);
+
+                        int VerblijfID = reader.GetInt32(0);
+
+                        DateTime Tijdstip = reader.GetDateTime(0);
+
+                        bool Voltooid = reader.GetBoolean(0);
+
+
+
+
+                        SchoonMaakBeurt schoonmaakbeurt =
+                            new SchoonMaakBeurt(SchoonmaakBeurtID, Tijdstip,  Voltooid,VerblijfID);
+
+
+                        SchoonMaakBeurten.Add(schoonmaakbeurt);
+
+                    }
+
+                }
+
+            }
+
+
+            return SchoonMaakBeurten;
+
+        }
+
+        #endregion
     }
 }
+        
+
