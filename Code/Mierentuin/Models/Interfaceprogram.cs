@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text;
+using casus.Mierentuin.DataAccess;
+
 /*TUTORIAL VOOR HET MAKEN VAN INTERFACES
  *Maak 2 lijsten
  *List<string> (Opieslist) new List<string>() {"optie 1","Optie 2"}; Hier staan de strings die de opties beschrijven
@@ -90,6 +92,11 @@ namespace casus.Mierentuin.Models
             return true;
         }
 
+        public bool Stopinterface()
+        {
+            return true;
+        }
+        
         
     }
 }
