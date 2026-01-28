@@ -19,7 +19,7 @@ namespace casus.Mierentuin.Models
             return true;
         }
 
-        public bool UnderConstruction(Func<bool> schermterug)
+        public static bool UnderConstruction(Func<bool> schermterug)
         {
             Console.WriteLine("under construction\n\n\n\n\n\n\n\n");
             schermterug();
