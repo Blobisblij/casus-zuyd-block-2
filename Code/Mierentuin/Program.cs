@@ -34,8 +34,9 @@ namespace casus.Mierentuin
             {
                 
             };
-            
-
+            Interfaceprogram ManagerDierenverzorgerinterface = new Interfaceprogram(
+                MenuFuncManagerDierenverzorger, MenukeuzesmanagerDierenverzorger,
+                ManagerDierenverzorgerErrormsg, ManagerDierenverzorgerprompt);
             //Verblijfs manager
             string Verblijfsmagagerprompt = "";
             string VerblijfsmagagerErrormsg = "";
@@ -48,6 +49,7 @@ namespace casus.Mierentuin
             {
                 
             };
+            Interfaceprogram Verblijfsmagagerinterface = new Interfaceprogram(MenuFuncVerblijfsmagager,MenukeuzesVeblijfsmanager,VerblijfsmagagerErrormsg,Verblijfsmagagerprompt);
             //verblijfsmedewerler
             string Verblijfsmedewerkerprompt = "";
             string VerblijfsmedewerkerErrormsg = "";
@@ -60,6 +62,10 @@ namespace casus.Mierentuin
             {
                 
             };
+            
+            Interfaceprogram Verblijfsmedewerkerinterface = new Interfaceprogram(
+                MenuFuncVerblijfsmedewerker, MenukeuzesVerblijfsmedewerker, VerblijfsmedewerkerErrormsg,
+                Verblijfsmedewerkerprompt);
             //Dierenverzorger
             string Dierenverzorgerprompt = "";
             string DierenverzorgerErrormsg = "";
@@ -74,6 +80,7 @@ namespace casus.Mierentuin
             {
                 
             };
+            Interfaceprogram Dierenverzorgerinterface = new Interfaceprogram(MenuFuncDierenverzorger,MenukeuzesDierenverzorger,DierenverzorgerErrormsg,Dierenverzorgerprompt);
             //maakt een list van alle users
             List<string> naamenfunctie = new List<string>();
             foreach (Werknemer werknemer in werknemers)
@@ -88,23 +95,19 @@ namespace casus.Mierentuin
                 switch (werknemer.Functie)
                 {
                     case "verblijfmedewerker":
-                        Interfaceprogram Verblijfsmedewerkerinterface = new Interfaceprogram(werknemer,
-                            MenuFuncVerblijfsmedewerker, MenukeuzesVerblijfsmedewerker, VerblijfsmedewerkerErrormsg,
-                            Verblijfsmedewerkerprompt);
+                        Verblijfsmedewerkerinterface.Werknemer = werknemer;
                         Loginfunc.Add(Verblijfsmedewerkerinterface.Startinterface);
                         break;
                     case "verblijfsmagager":
-                        Interfaceprogram Verblijfsmagagerinterface = new Interfaceprogram(werknemer,MenuFuncVerblijfsmagager,MenukeuzesVeblijfsmanager,VerblijfsmedewerkerErrormsg,Verblijfsmedewerkerprompt);
+                        Verblijfsmagagerinterface.Werknemer = werknemer;
                         Loginfunc.Add(Verblijfsmagagerinterface.Startinterface);
                         break;
                     case "Dierenverzorger":
-                        Interfaceprogram Dierenverzorgerinterface = new Interfaceprogram(werknemer,MenuFuncDierenverzorger,MenukeuzesDierenverzorger,DierenverzorgerErrormsg,Dierenverzorgerprompt);
+                        Dierenverzorgerinterface.Werknemer = werknemer;
                         Loginfunc.Add(Dierenverzorgerinterface.Startinterface);
                         break;
                     case "MamagerDierenverzorgers":
-                        Interfaceprogram ManagerDierenverzorgerinterface = new Interfaceprogram(werknemer,
-                            MenuFuncManagerDierenverzorger, MenukeuzesmanagerDierenverzorger,
-                            ManagerDierenverzorgerErrormsg, ManagerDierenverzorgerprompt);
+                        ManagerDierenverzorgerinterface.Werknemer = werknemer;
                         Loginfunc.Add(ManagerDierenverzorgerinterface.Startinterface);
                         break;
                 }
@@ -113,7 +116,7 @@ namespace casus.Mierentuin
             Interfaceprogram Loginmenu = new Interfaceprogram(NotLoggedIn, Loginfunc, naamenfunctie,
                 "Typ een getal wat binnen de gegeven waarden valt",
                 "Typ het getal wat voor de gebruiker staat waarmee u wil inloggen:");
-            
+            Interfaceprogram Terug = Loginmenu;
             Loginmenu.Startinterface();
 
 

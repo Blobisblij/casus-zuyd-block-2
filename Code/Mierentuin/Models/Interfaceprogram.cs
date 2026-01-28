@@ -32,7 +32,7 @@ namespace casus.Mierentuin.Models
         public Werknemer Werknemer
         {
             get {  return user; }
-            private set { user = value; }
+            set { user = value; }
         }
         private List<Func<bool>> functielijst;
         private List<string> opties;
@@ -42,6 +42,14 @@ namespace casus.Mierentuin.Models
         public Interfaceprogram(Werknemer user,List<Func<bool>> functielijst,List<string> opties,string errormsg, string inputprompt)
         {
             this.user = user;
+            this.functielijst = functielijst;
+            this.opties = opties;      
+            this.errormsg = errormsg;
+            this.inputprompt = inputprompt;
+        }
+        
+        public Interfaceprogram(List<Func<bool>> functielijst,List<string> opties,string errormsg, string inputprompt)
+        {
             this.functielijst = functielijst;
             this.opties = opties;      
             this.errormsg = errormsg;
@@ -103,6 +111,7 @@ namespace casus.Mierentuin.Models
         {
             return true;
         }
+        
         
         
         
