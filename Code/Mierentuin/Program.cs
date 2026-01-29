@@ -12,120 +12,13 @@ namespace casus.Mierentuin
 
             //login
             //comment uit als we een database hebben
-            //List<Werknemer> werknemers = DALSQL.GetAllWerknemers();
-            Werknemer NotLoggedIn = new Werknemer("", "");
-            Werknemer sam = new Werknemer("sam", "verblijfmedewerker");
-            Werknemer Pieter = new Werknemer("Pieter", "Dierenverzorger");
-            Werknemer ayman = new Werknemer("ayman", "verblijfsmagager");
-            Werknemer Hans = new Werknemer("Hans", "MamagerDierenverzorgers");
+            List<Werknemer> werknemersSQL = DALSQL.GetAllWerknemers();
+
             //Voerschema
-            //VoerSchema voerSchema = new VoerSchema("Voerschema",DALSQL.GetAllVoerbeurt());
+            VoerSchema voerSchema = new VoerSchema("Voerschema", DALSQL.GetAllVoerbeurt());
             //schoonmaakschema
 
-            List<Werknemer> werknemers = new List<Werknemer>() { sam, Pieter, ayman };
-            staticvorigmenu vorig = new staticvorigmenu();
-            //startscherm
-            //Maneger Dierenverzorgers
-            string ManagerDierenverzorgerprompt = "";    Interfaceprogram vorigmenu;
-            string ManagerDierenverzorgerErrormsg = "";
-            List<string> MenukeuzesmanagerDierenverzorger = new List<string>()
-            {
-                
-            };
 
-            List<Func<bool>> MenuFuncManagerDierenverzorger = new List<Func<bool>>()
-            {
-                
-            };
-            Interfaceprogram ManagerDierenverzorgerinterface = new Interfaceprogram(
-                MenuFuncManagerDierenverzorger, MenukeuzesmanagerDierenverzorger,
-                ManagerDierenverzorgerErrormsg, ManagerDierenverzorgerprompt);
-            //Verblijfs manager
-            string Verblijfsmagagerprompt = "";
-            string VerblijfsmagagerErrormsg = "";
-            List<string> MenukeuzesVeblijfsmanager = new List<string>()
-            {
-                
-            };
-
-            List<Func<bool>> MenuFuncVerblijfsmagager = new List<Func<bool>>()
-            {
-                
-            };
-            Interfaceprogram Verblijfsmagagerinterface = new Interfaceprogram(MenuFuncVerblijfsmagager,MenukeuzesVeblijfsmanager,VerblijfsmagagerErrormsg,Verblijfsmagagerprompt);
-            //verblijfsmedewerler
-            string Verblijfsmedewerkerprompt = "";
-            string VerblijfsmedewerkerErrormsg = "";
-            List<string> MenukeuzesVerblijfsmedewerker = new List<string>()
-            {
-                
-            };
-
-            List<Func<bool>> MenuFuncVerblijfsmedewerker = new List<Func<bool>>()
-            {
-                
-            };
-            
-            Interfaceprogram Verblijfsmedewerkerinterface = new Interfaceprogram(
-                MenuFuncVerblijfsmedewerker, MenukeuzesVerblijfsmedewerker, VerblijfsmedewerkerErrormsg,
-                Verblijfsmedewerkerprompt);
-            //Dierenverzorger
-            string Dierenverzorgerprompt = "Hallo Dierenverzorger typ het getal voor uw keuze:";
-            string DierenverzorgerErrormsg = "de invoer valt niet binnen de keuzes probeer opnieuw!";
-            List<string> MenukeuzesDierenverzorger = new List<string>()
-            {
-                "Stop het programma",
-                "Begin aan jou werkschema.",
-                "Dieren Inzien/Bewerken.",
-                "Verblijven inzien/Bewerken."
-            };
-            
-            List<Func<bool>> MenuFuncDierenverzorger = new List<Func<bool>>()
-            {
-                Interfaceprogram.Stopinterface,
-
-                
-            };
-            Interfaceprogram Dierenverzorgerinterface = new Interfaceprogram(MenuFuncDierenverzorger,MenukeuzesDierenverzorger,DierenverzorgerErrormsg,Dierenverzorgerprompt);
-            
-            //maakt een list van alle users
-            List<string> naamenfunctie = new List<string>();
-            foreach (Werknemer werknemer in werknemers)
-            {
-                string naamfunctie = $"{werknemer.Naam}         {werknemer.Functie}";
-                naamenfunctie.Add(naamfunctie);
-            }
-            //checkt de functie van de gebruiker en geeft het correcte vervolg interface
-            List<Func<bool>> Loginfunc = new List<Func<bool>>();
-            foreach (Werknemer werknemer in werknemers)
-            {
-                switch (werknemer.Functie)
-                {
-                    case "verblijfmedewerker":
-                        Verblijfsmedewerkerinterface.Werknemer = werknemer;
-                        Loginfunc.Add(Verblijfsmedewerkerinterface.Startinterface);
-                        break;
-                    case "verblijfsmagager":
-                        Verblijfsmagagerinterface.Werknemer = werknemer;
-                        Loginfunc.Add(Verblijfsmagagerinterface.Startinterface);
-                        break;
-                    case "Dierenverzorger":
-                        Dierenverzorgerinterface.Werknemer = werknemer;
-                        Loginfunc.Add(Dierenverzorgerinterface.Startinterface);
-                        break;
-                    case "MamagerDierenverzorgers":
-                        ManagerDierenverzorgerinterface.Werknemer = werknemer;
-                        Loginfunc.Add(ManagerDierenverzorgerinterface.Startinterface);
-                        break;
-                }
-            }
-
-            Interfaceprogram Loginmenu = new Interfaceprogram(NotLoggedIn, Loginfunc, naamenfunctie,
-                "Typ een getal wat binnen de gegeven waarden valt",
-                "Typ het getal wat voor de gebruiker staat waarmee u wil inloggen:");
-            vorig.setterug(Loginmenu);
-            
-                Loginmenu.Startinterface();
         }
     }
 }
