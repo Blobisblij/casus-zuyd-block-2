@@ -13,11 +13,15 @@ namespace casus.Mierentuin
             //login
             //comment uit als we een database hebben
             List<Werknemer> werknemersSQL = DALSQL.GetAllWerknemers();
+            List<Dier> dierenSQL = DALSQL.GetAllDieren();
 
             //Voerschema
-            VoerSchema voerSchema = new VoerSchema("Voerschema", DALSQL.GetAllVoerbeurt());
+            //VoerSchema voerSchema = new VoerSchema("Voerschema", DALSQL.GetAllVoerbeurt());
             //schoonmaakschema
+            
+            //Testclass.TestSQL();
 
+            Testclass.TestSQL();
 
         }
     }

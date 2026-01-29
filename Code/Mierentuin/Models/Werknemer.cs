@@ -30,7 +30,7 @@ namespace casus.Mierentuin.Models
         {
             this.naam = naam;
             this.functie = functie;
-            werknemerid=0;
+
         }
         
         public Werknemer(int werknemerid,string naam,string functie)
