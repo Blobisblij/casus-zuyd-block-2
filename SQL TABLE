@@ -1,0 +1,54 @@
+CREATE TABLE Verblijf (
+    verblijfID INT PRIMARY KEY,
+    naam VARCHAR(100) NOT NULL,
+    beschrijving TEXT,
+    poortopen bit NOT NULL
+);
+
+CREATE TABLE Dier (
+    dierID INT PRIMARY KEY,
+    typedier VARCHAR(50) NOT NULL,
+    naam VARCHAR(100) NOT NULL,
+    verblijfID INT,
+    notitie TEXT,
+    FOREIGN KEY (verblijfID) REFERENCES Verblijf(verblijfID)
+);
+
+CREATE TABLE Werknemer (
+    werknemerID INT PRIMARY KEY,
+    naam VARCHAR(100) NOT NULL,
+    functie VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE SchoonMaakBeurt (
+    schoonmaakID INT PRIMARY KEY,
+    tijdstip DATETIME NOT NULL,
+    verblijfID INT NOT NULL,
+    voltooid bit NOT NULL,
+    FOREIGN KEY (verblijfID) REFERENCES Verblijf(verblijfID)
+);
+
+CREATE TABLE SchoonmaakWerknemer (
+    schoonmaakID INT,
+    werknemerID INT,
+    PRIMARY KEY (schoonmaakID, werknemerID),
+    FOREIGN KEY (schoonmaakID) REFERENCES SchoonMaakBeurt(schoonmaakID),
+    FOREIGN KEY (werknemerID) REFERENCES Werknemer(werknemerID)
+);
+
+CREATE TABLE VoerBeurt (
+    voerbeurtID INT PRIMARY KEY,
+    typevoer VARCHAR(50) NOT NULL,
+    hoeveelheidVoer DECIMAL(6,2) NOT NULL,
+    tijdstip DATETIME NOT NULL,
+    verblijfID INT NOT NULL,
+    FOREIGN KEY (verblijfID) REFERENCES Verblijf(verblijfID)
+);
+
+CREATE TABLE VoerBeurtWerknemer (
+    voerbeurtID INT,
+    werknemerID INT,
+    PRIMARY KEY (voerbeurtID, werknemerID),
+    FOREIGN KEY (voerbeurtID) REFERENCES VoerBeurt(voerbeurtID),
+    FOREIGN KEY (werknemerID) REFERENCES Werknemer(werknemerID)
+);

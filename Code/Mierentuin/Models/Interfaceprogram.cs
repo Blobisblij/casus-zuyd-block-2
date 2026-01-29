@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text;
+using casus.Mierentuin.DataAccess;
+
 /*TUTORIAL VOOR HET MAKEN VAN INTERFACES
  *Maak 2 lijsten
  *List<string> (Opieslist) new List<string>() {"optie 1","Optie 2"}; Hier staan de strings die de opties beschrijven
@@ -25,11 +27,12 @@ namespace casus.Mierentuin.Models
 {
     internal class Interfaceprogram
     {
+        public Interfaceprogram Vorigmenu;
         private Werknemer user;
         public Werknemer Werknemer
         {
             get {  return user; }
-            private set { user = value; }
+            set { user = value; }
         }
         private List<Func<bool>> functielijst;
         private List<string> opties;
@@ -39,6 +42,14 @@ namespace casus.Mierentuin.Models
         public Interfaceprogram(Werknemer user,List<Func<bool>> functielijst,List<string> opties,string errormsg, string inputprompt)
         {
             this.user = user;
+            this.functielijst = functielijst;
+            this.opties = opties;      
+            this.errormsg = errormsg;
+            this.inputprompt = inputprompt;
+        }
+        
+        public Interfaceprogram(List<Func<bool>> functielijst,List<string> opties,string errormsg, string inputprompt)
+        {
             this.functielijst = functielijst;
             this.opties = opties;      
             this.errormsg = errormsg;
@@ -90,6 +101,20 @@ namespace casus.Mierentuin.Models
             return true;
         }
 
+        public bool GaTerugInterface()
+        {
+            Vorigmenu.startinterface();
+            return true;
+        }
+        
+        public bool Stopinterface()
+        {
+            return true;
+        }
+        
+        
+        
+        
         
     }
 }
