@@ -10,12 +10,8 @@ namespace casus.Mierentuin.DataAccess
     public class DALSQL
 
     {
-        private static string webserver = ".";
-
-        private static string database = "Mierentuin";
-
         public static string connectionString =
-            $"Server={webserver};Database={database};Trusted_Connection=True;TrustServerCertificate=True;";
+            $"Server=tcp:mierentuin.database.windows.net,1433;Initial Catalog=Mierentuin;Persist Security Info=False;User ID=MierentuinAdmin;Password=Welkom1234567890;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
 // Insert en select scripts voor sql 
 // om een object te schijven naar sql moet je DALSQL.adddata(object) doen zorg er voor dat de opjecten gevuld zijn voordat je ze schijft
