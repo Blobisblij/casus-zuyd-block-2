@@ -8,6 +8,7 @@ namespace casus.Mierentuin.Models
     {
         private string naam;
         private List<VoerBeurt> schema;
+        public Werknemer werknemer;
         
         public VoerSchema(string naam, List<VoerBeurt> schema)
         {
@@ -15,7 +16,7 @@ namespace casus.Mierentuin.Models
             this.schema = schema;
         }
         
-        public List<VoerBeurt> WerknemerWerkSchema(Werknemer  werknemer)
+        private List<VoerBeurt> werknemerwerkschema(Werknemer  werknemer)
         {
             List<VoerBeurt> VoerbeurtvanWerknemer = new List<VoerBeurt>();
             foreach (VoerBeurt voerbeurt in schema)
@@ -30,7 +31,26 @@ namespace casus.Mierentuin.Models
             }
             return VoerbeurtvanWerknemer;
         }
-        
-        
+
+        public bool Werkschemainterface(Werknemer werknemer)
+        {
+            List<VoerBeurt> werkschema = werknemerwerkschema(werknemer);
+            Console.WriteLine("Werkschema Voerbeurten\nTypeVoer     Hoeveelheid     Verblijf       Voltooid");
+            foreach (VoerBeurt beurt in werkschema)
+            {
+                string typevoer = beurt.Typevoer;
+                decimal hoeveel = beurt.Hoeveelheidvoer;
+                String verblijfnaam = beurt.Verblijf.Naam;
+                bool voitooid = beurt.Voltooid;
+                Console.Write($"{typevoer}      {hoeveel}     {verblijfnaam}        {voitooid}\n");
+                
+            }
+            return true;
+        }
+
+        public bool Werkschemainterface()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
