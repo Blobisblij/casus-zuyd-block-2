@@ -39,17 +39,6 @@ namespace casus.Mierentuin.Models
             List<VoerBeurt> voerbeurten = DALSQL.GetAllVoerbeurt();
             Console.WriteLine("schoonmaakbeurten");
             List<SchoonMaakBeurt> schoonMaakBeurten = DALSQL.GetAllSchoonMaakBeurt();
-
-            foreach (Verblijf v in verblijven)
-            {
-                Console.WriteLine($"{v.Naam}{v.Beschrijving},{v.Verblijfid},{v.DiereninVerblijf}");
-                foreach (Dier D in v.DiereninVerblijf)
-                {
-                    
-                    Console.WriteLine($"{D.Naam}{D.Notitie}");
-                }
-                Console.WriteLine("doorloop");
-            }
         }
     }
 }

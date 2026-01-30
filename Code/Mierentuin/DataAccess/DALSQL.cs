@@ -26,7 +26,7 @@ namespace casus.Mierentuin.DataAccess
 
         {
             string query =
-                "INSERT INTO Dier (Naam,Typedier,Notitie,Verblijfid) VALUES (@Naam, @DierID,@Notitie,@VerblijfID)";
+                "INSERT INTO Dier (Naam,Typedier,Notitie,Verblijfid) VALUES (@Naam,@Typedier,@Notitie,@VerblijfID)";
             
             using SqlConnection connection = new SqlConnection(connectionString);
             using SqlCommand command = new SqlCommand(query, connection);
