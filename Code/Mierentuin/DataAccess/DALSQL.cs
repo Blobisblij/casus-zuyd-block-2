@@ -26,7 +26,7 @@ namespace casus.Mierentuin.DataAccess
 
         {
             string query =
-                "INSERT INTO Dier (Naam,Typedier,Notitie,Verblijfid) VALUES (@Naam, @DierID,@Notitie,@VerblijfID)";
+                "INSERT INTO Dier (Naam,Typedier,Notitie,Verblijfid) VALUES (@Naam,@Typedier,@Notitie,@VerblijfID)";
             
             using SqlConnection connection = new SqlConnection(connectionString);
             using SqlCommand command = new SqlCommand(query, connection);
@@ -56,11 +56,11 @@ namespace casus.Mierentuin.DataAccess
                     {
                         int Dierid = reader.GetInt32(0);
                         int VerblijfID = reader.GetInt32(3);
-                        string naam = reader.GetString(2);
+                        string Naam = reader.GetString(2);
                         string DierType = reader.GetString(1);
                         string Notitie = reader.GetString(4);
-                        
-                        Dier Dier = new Dier(Dierid, naam, Notitie, DierType, VerblijfID);
+                        Dier Dier = new Dier(Dierid, Naam, Notitie, DierType, VerblijfID);
+                        Console.WriteLine($"{Dierid} - {DierType} - {Notitie}");
                         Dierlist.Add(Dier);
                     }
                 }
@@ -193,23 +193,16 @@ namespace casus.Mierentuin.DataAccess
                         string beschrijving = reader.GetString(2);
 
                         bool poortopten = reader.GetBoolean(3);
-
+                        
                         Verblijf verblijf = new Verblijf(verblijfID, naam, beschrijving, poortopten);
-
-
+                        
                         verblijflijst.Add(verblijf);
-
+                        
                     }
-
                 }
-
             }
-
-
             return verblijflijst;
-
         }
-
         #endregion
 
         #region voerbeurt
@@ -237,11 +230,10 @@ namespace casus.Mierentuin.DataAccess
             command.Parameters.AddWithValue("Tijdstip", voerbeurt.Tijdstip);
 
             command.Parameters.AddWithValue("Voltooid", voerbeurt.Voltooid);
-
+            
             connection.Open();
 
             command.ExecuteNonQuery();
-
         }
 
         public static List<VoerBeurt> GetAllVoerbeurt()
@@ -266,18 +258,18 @@ namespace casus.Mierentuin.DataAccess
 
                     {
 
-                        int VerblijfID = reader.GetInt32(3);
+                        int VerblijfID = reader.GetInt32(4);
                         
                         int VoerBeurtID = reader.GetInt32(0);
                         
                         string Typevoer = reader.GetString(1);
 
-                        int HoeveelheidVoer = reader.GetInt32(2);
+                        Decimal HoeveelheidVoer = reader.GetDecimal(2);
 
                         DateTime Tijdstip = reader.GetDateTime(3);
 
-                        bool Voltooid = reader.GetBoolean(4);
-
+                        bool Voltooid = reader.GetBoolean(5);
+                        Console.WriteLine("tot hier");
                         VoerBeurt Voerbeurt = new VoerBeurt(VoerBeurtID,Typevoer, Tijdstip, HoeveelheidVoer, Voltooid,VoerBeurtID);
 
 
@@ -301,19 +293,14 @@ namespace casus.Mierentuin.DataAccess
 
             string query =
                 "INSERT INTO VoerBeurtWerknemer (VoerbeurtID,WerknemerID) VALUES (@VoerBeurtID, @WerknemerID)";
-
-
+            
             using SqlConnection connection = new SqlConnection(connectionString);
-
             using SqlCommand command = new SqlCommand(query, connection);
-
-
+            
             command.Parameters.AddWithValue("@VoerBeurtID", voerBeurtWerknemer.VoerBeurtID);
-
             command.Parameters.AddWithValue("@WerknemerID", voerBeurtWerknemer.WerknemerID);
 
             connection.Open();
-
             command.ExecuteNonQuery();
 
         }
@@ -324,29 +311,19 @@ namespace casus.Mierentuin.DataAccess
             List<VoerBeurtWerknemer> voerBeurtWerknemers = new List<VoerBeurtWerknemer>();
 
             using SqlConnection connection = new SqlConnection(connectionString);
-
             using SqlCommand command = new SqlCommand(query, connection);
 
             {
-
                 connection.Open();
-
                 using (SqlDataReader reader = command.ExecuteReader())
-
                 {
-
-
                     while (reader.Read())
-
                     {
-
                         int VoerBeurtID = reader.GetInt32(0);
                         int WerknemerID = reader.GetInt32(1);
-
+                        
                         VoerBeurtWerknemer voerBeurtWerknemer = new VoerBeurtWerknemer(VoerBeurtID, WerknemerID);
-
-
-
+                        
                         voerBeurtWerknemers.Add(voerBeurtWerknemer);
 
                     }
@@ -361,24 +338,17 @@ namespace casus.Mierentuin.DataAccess
         #region SchoonmaakWerknemer
         public static void Adddata(SchoonmaakWerknemer schoonmaakWerknemer)
         {
-
             string query =
                 "INSERT INTO SchoonmaakWerknemer (SchoonmaakbeurtID,WerknemerID) VALUES (@SchoonmaakBeurtID, @WerknemerID)";
-
-
+            
             using SqlConnection connection = new SqlConnection(connectionString);
-
             using SqlCommand command = new SqlCommand(query, connection);
-
-
+            
             command.Parameters.AddWithValue("@VoerBeurtID", schoonmaakWerknemer.SchoonmaakBeurtID);
-
             command.Parameters.AddWithValue("@WerknemerID", schoonmaakWerknemer.WerknemerID);
 
             connection.Open();
-
             command.ExecuteNonQuery();
-
         }
 
         public static List<SchoonmaakWerknemer> GetAllSchoonmaakWerknemer()
@@ -387,40 +357,25 @@ namespace casus.Mierentuin.DataAccess
             List<SchoonmaakWerknemer> schoonmaakWerknemers = new List<SchoonmaakWerknemer>();
 
             using SqlConnection connection = new SqlConnection(connectionString);
-
             using SqlCommand command = new SqlCommand(query, connection);
-
             {
-
                 connection.Open();
 
                 using (SqlDataReader reader = command.ExecuteReader())
-
                 {
-
-
                     while (reader.Read())
-
                     {
-
                         int SchoonmaakbeurtID = reader.GetInt32(0);
                         int WerknemerID = reader.GetInt32(1);
 
                         SchoonmaakWerknemer schoonmaakWerknemer = new SchoonmaakWerknemer(SchoonmaakbeurtID, WerknemerID);
-
-
-
+                        
                         schoonmaakWerknemers.Add(schoonmaakWerknemer);
-
                     }
-
                 }
-
             }
             return schoonmaakWerknemers;
         }
-
-
         #endregion
 
         #region Schoonmaakbeurt
@@ -434,73 +389,42 @@ namespace casus.Mierentuin.DataAccess
 
 
             using SqlConnection connection = new SqlConnection(connectionString);
-
             using SqlCommand command = new SqlCommand(query, connection);
 
 
             command.Parameters.AddWithValue("@schoonmaakID", schoonmaakbeurt.SchoonmaakBeurtID);
-
             command.Parameters.AddWithValue("@tijdstip", schoonmaakbeurt.Tijdstip);
-
             command.Parameters.AddWithValue("@verblijfID", schoonmaakbeurt.Verblijf.Verblijfid);
-
             command.Parameters.AddWithValue("@voltooid", schoonmaakbeurt.Voltooid);
-
+            
             connection.Open();
-
             command.ExecuteNonQuery();
-
         }
-
         public static List<SchoonMaakBeurt> GetAllSchoonMaakBeurt()
         {
             string query = "SELECT * FROM SchoonMaakBeurt";
             List<SchoonMaakBeurt> SchoonMaakBeurten = new List<SchoonMaakBeurt>();
 
             using SqlConnection connection = new SqlConnection(connectionString);
-
             using SqlCommand command = new SqlCommand(query, connection);
-
             {
-
                 connection.Open();
-
                 using (SqlDataReader reader = command.ExecuteReader())
-
                 {
-                    
                     while (reader.Read())
-
                     {
-
                         int SchoonmaakBeurtID = reader.GetInt32(0);
-
                         int VerblijfID = reader.GetInt32(2);
-
                         DateTime Tijdstip = reader.GetDateTime(1);
-
                         bool Voltooid = reader.GetBoolean(3);
-
-
-
-
-                        SchoonMaakBeurt schoonmaakbeurt =
-                            new SchoonMaakBeurt(SchoonmaakBeurtID, Tijdstip,  Voltooid,VerblijfID);
-
-
+                        
+                        SchoonMaakBeurt schoonmaakbeurt = new SchoonMaakBeurt(SchoonmaakBeurtID, Tijdstip,  Voltooid,VerblijfID);
                         SchoonMaakBeurten.Add(schoonmaakbeurt);
-
                     }
-
                 }
-
             }
-
-
             return SchoonMaakBeurten;
-
         }
-
         #endregion
     }
 }

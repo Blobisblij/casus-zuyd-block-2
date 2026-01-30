@@ -53,6 +53,7 @@ namespace casus.Mierentuin.Models
         
         public bool Voltooid;
 
+        
         public VoerBeurt(int voerbeurtID,string typevoer,DateTime tijdstip,Decimal hoeveelheidvoer,bool Voltooid,int VerblijfID)
         {
             this.typevoer = typevoer;
@@ -61,7 +62,8 @@ namespace casus.Mierentuin.Models
             this.Voltooid = Voltooid;
             this.voerbeurtID = voerbeurtID;
            //Vind het goeie verblijf
-            foreach (Verblijf verblijf in DALSQL.GetAllVerblijf())
+           List<Verblijf> verblijven = DALSQL.GetAllVerblijf();
+            foreach (Verblijf verblijf in verblijven)
             {
                 if (VerblijfID == verblijf.Verblijfid)
                 {
@@ -78,13 +80,14 @@ namespace casus.Mierentuin.Models
                 }
             }
 
+            this.Werknemers = new List<Werknemer>();
             foreach (Werknemer werknemer in DALSQL.GetAllWerknemers())
             {
                 foreach (int werknemerID in werknemerids)
                 {
                     if (werknemer.Werknemerid == werknemerID)
                     {
-                        Werknemers.Add(werknemer);
+                        this.Werknemers.Add(werknemer);
                     }
                 }
             }
