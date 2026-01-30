@@ -12,7 +12,7 @@ namespace casus.Mierentuin.Models
         public string Naam { get; set; }
         public string Beschrijving;
         public bool PoortOpen;
-        public List<Dier> DiereninVerblijf { get; set; }
+        public List<Dier> DiereninVerblijf { get; set; } = new List<Dier>();
 
         public Verblijf(string Naam, string Beschrijving)
         {

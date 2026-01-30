@@ -247,48 +247,38 @@ namespace casus.Mierentuin.DataAccess
         public static List<VoerBeurt> GetAllVoerbeurt()
         {
             string query = "SELECT * FROM VoerBeurt";
-            List<VoerBeurt> Voerbeurten = new List<VoerBeurt>();
+            var Voerbeurten = new List<VoerBeurt>();
 
-            using SqlConnection connection = new SqlConnection(connectionString);
+            using var connection = new SqlConnection(connectionString);
+            using var command = new SqlCommand(query, connection);
 
-            using SqlCommand command = new SqlCommand(query, connection);
+            connection.Open();
+            using var reader = command.ExecuteReader();
 
+            int ordVoerBeurtID = reader.GetOrdinal("VoerBeurtID");
+            int ordTypevoer = reader.GetOrdinal("Typevoer");
+            int ordHoeveelheid = reader.GetOrdinal("HoeveelheidVoer");
+            int ordTijdstip = reader.GetOrdinal("Tijdstip");
+            int ordVerblijfID = reader.GetOrdinal("VerblijfID");
+            int ordVoltooid = reader.GetOrdinal("Voltooid");
+
+            while (reader.Read())
             {
+                int VoerBeurtID = reader.GetInt32(ordVoerBeurtID);
+                string Typevoer = reader.GetString(ordTypevoer);
 
-                connection.Open();
+                // read numeric robustly and convert to decimal to match model
+                object hoeveelheidObj = reader.GetValue(ordHoeveelheid);
+                decimal HoeveelheidVoer = Convert.ToDecimal(hoeveelheidObj);
 
-                using (SqlDataReader reader = command.ExecuteReader())
+                DateTime Tijdstip = reader.GetDateTime(ordTijdstip);
+                int VerblijfID = reader.GetInt32(ordVerblijfID);
+                bool Voltooid = reader.GetBoolean(ordVoltooid);
 
-                {
-
-
-                    while (reader.Read())
-
-                    {
-
-                        int VerblijfID = reader.GetInt32(3);
-                        
-                        int VoerBeurtID = reader.GetInt32(0);
-                        
-                        string Typevoer = reader.GetString(1);
-
-                        int HoeveelheidVoer = reader.GetInt32(2);
-
-                        DateTime Tijdstip = reader.GetDateTime(3);
-
-                        bool Voltooid = reader.GetBoolean(4);
-
-                        VoerBeurt Voerbeurt = new VoerBeurt(VoerBeurtID,Typevoer, Tijdstip, HoeveelheidVoer, Voltooid,VoerBeurtID);
-
-
-
-                        Voerbeurten.Add(Voerbeurt);
-
-                    }
-
-                }
-
+                var Voerbeurt = new VoerBeurt(VoerBeurtID, Typevoer, Tijdstip, HoeveelheidVoer, Voltooid, VerblijfID);
+                Voerbeurten.Add(Voerbeurt);
             }
+
             return Voerbeurten;
         }
 
