@@ -8,9 +8,6 @@ namespace casus.Mierentuin
     {
         public static void Main()
         {
-            //maak hier alle interfaces aan
-
-        // inladen van alle Objecten uit de database
             List<Werknemer> werknemersSQL = DALSQL.GetAllWerknemers();
             List<Dier> dierenSQL = DALSQL.GetAllDieren();
             List<Verblijf> verblijfSQL = DALSQL.GetAllVerblijf();
@@ -65,14 +62,51 @@ namespace casus.Mierentuin
                                                 diermenu = false;
                                                 break;
                                             case "1":
-                                                Console.WriteLine("Niet ontwikkeld voor project");
+                                                //usecase ayman
+
+                                                #region aymanusecase
+                                                // Vraag naam van het dier
+                                                bool invoercorrect = false;
+                                                while (!invoercorrect)
+                                                {
+                                                        Console.WriteLine("Voer de naam van het dier in:");
+                                                        string naam = Console.ReadLine();
+
+                                                        // Vraag type dier
+                                                        Console.WriteLine("Voer het type dier in:");
+                                                        string typedier = Console.ReadLine();
+
+                                                        // Vraag notitie inclusief verblijf
+                                                        Console.WriteLine(
+                                                            "Voer een notitie in.");
+                                                        string notitie = Console.ReadLine();
+
+                                                        if (naam.Length != 0 && typedier.Length != 0)
+                                                        {
+                                                            // Maak nieuw Dier object aan
+                                                            Dier nieuwdier = new Dier(naam, notitie, typedier, 1);
+
+                                                            // Voeg dier toe aan database
+                                                            DALSQL.Adddata(nieuwdier);
+
+                                                            Console.WriteLine("Het dier is succesvol aangemeld.");
+                                                            invoercorrect = true;
+                                                        }
+                                                        else
+                                                        {
+                                                            Console.WriteLine("u heeft bij typedier of naam niks ingevuld");
+                                                        }
+                                                }
+                                                #endregion
                                                 break;
                                             case "2":
+                                                //usecase sam
+
+                                                
                                                 bool dierselecteermenu = true;
+                                                //selecteer een dier en voeg een notitie 
                                                 while (dierselecteermenu)
                                                 {
-
-
                                                     Console.WriteLine(
                                                         "Selecteer het dier waarbij u een notitie wil maken");
                                                     int keuegetal = 1;
@@ -84,6 +118,7 @@ namespace casus.Mierentuin
 
                                                     Console.WriteLine(
                                                         "typ het getal voor het dier wat u wil selecteren");
+                                                    //try catch block om format fouten af te vangen
                                                     try
                                                     {
                                                         string invoer = Console.ReadLine();
@@ -102,14 +137,12 @@ namespace casus.Mierentuin
                                                         Console.WriteLine("invoer past niet binnen de gegeven keuzes");
                                                     }
                                                 }
-
                                                 break;
                                             default:
                                                 Console.WriteLine("invoer onjuist probeer opnieuw.");
                                                 break;
                                         }
                                     }
-
                                     break;
                                 case "2" :
                                     Console.WriteLine("Niet ontwikkeld voor project");
@@ -152,8 +185,6 @@ namespace casus.Mierentuin
                         break;
                 }
             }
-            
-
         }
     }
 }
