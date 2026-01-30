@@ -27,17 +27,14 @@ namespace casus.Mierentuin.Models
             this.Naam = Naam;
             this.Beschrijving = Beschrijving;
             this.PoortOpen = PoortOpen;
+            this.DiereninVerblijf = new List<Dier>();
             List<Dier> allendieren = DALSQL.GetAllDieren();
-
             foreach (Dier dier in allendieren)
             {
                 if (dier.VerblijfID == Verblijfid)
                 {
                     this.DiereninVerblijf.Add(dier);
                 }
-            }
-            {
-                
             }
         }
     }

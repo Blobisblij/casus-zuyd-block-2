@@ -8,120 +8,183 @@ namespace casus.Mierentuin
     {
         public static void Main()
         {
-            //maak hier alle interfaces aan
-
-            //login
-            //comment uit als we een database hebben
-            //List<Werknemer> werknemers = DALSQL.GetAllWerknemers();
-            Werknemer NotLoggedIn = new Werknemer("", "");
-            Werknemer sam = new Werknemer("sam", "verblijfmedewerker");
-            Werknemer Pieter = new Werknemer("Pieter", "Dierenverzorger");
-            Werknemer ayman = new Werknemer("ayman", "verblijfsmagager");
-            Werknemer Hans = new Werknemer("Hans", "MamagerDierenverzorgers");
-
-            List<Werknemer> werknemers = new List<Werknemer>() { sam, Pieter, ayman };
-
-            //startscherm
-            //Maneger Dierenverzorgers
-            string ManagerDierenverzorgerprompt = "";
-            string ManagerDierenverzorgerErrormsg = "";
-            List<string> MenukeuzesmanagerDierenverzorger = new List<string>()
-            {
-                
-            };
-
-            List<Func<bool>> MenuFuncManagerDierenverzorger = new List<Func<bool>>()
-            {
-                
-            };
-            Interfaceprogram ManagerDierenverzorgerinterface = new Interfaceprogram(
-                MenuFuncManagerDierenverzorger, MenukeuzesmanagerDierenverzorger,
-                ManagerDierenverzorgerErrormsg, ManagerDierenverzorgerprompt);
-            //Verblijfs manager
-            string Verblijfsmagagerprompt = "";
-            string VerblijfsmagagerErrormsg = "";
-            List<string> MenukeuzesVeblijfsmanager = new List<string>()
-            {
-                
-            };
-
-            List<Func<bool>> MenuFuncVerblijfsmagager = new List<Func<bool>>()
-            {
-                
-            };
-            Interfaceprogram Verblijfsmagagerinterface = new Interfaceprogram(MenuFuncVerblijfsmagager,MenukeuzesVeblijfsmanager,VerblijfsmagagerErrormsg,Verblijfsmagagerprompt);
-            //verblijfsmedewerler
-            string Verblijfsmedewerkerprompt = "";
-            string VerblijfsmedewerkerErrormsg = "";
-            List<string> MenukeuzesVerblijfsmedewerker = new List<string>()
-            {
-                
-            };
-
-            List<Func<bool>> MenuFuncVerblijfsmedewerker = new List<Func<bool>>()
-            {
-                
-            };
+            List<Werknemer> werknemersSQL = DALSQL.GetAllWerknemers();
+            List<Dier> dierenSQL = DALSQL.GetAllDieren();
+            List<Verblijf> verblijfSQL = DALSQL.GetAllVerblijf();
+            List<VoerBeurt> voerbeurtSQL = DALSQL.GetAllVoerbeurt();
+            List<VoerBeurtWerknemer> voerBeurtWerknemersSQL = DALSQL.GetAllVoerbeurtWerknemer();
+            List<SchoonMaakBeurt> schoonMaakBeurtSQL = DALSQL.GetAllSchoonMaakBeurt();
+            List<SchoonmaakWerknemer> schoonmaakWerknemerSQL = DALSQL.GetAllSchoonmaakWerknemer();
             
-            Interfaceprogram Verblijfsmedewerkerinterface = new Interfaceprogram(
-                MenuFuncVerblijfsmedewerker, MenukeuzesVerblijfsmedewerker, VerblijfsmedewerkerErrormsg,
-                Verblijfsmedewerkerprompt);
-            //Dierenverzorger
-            string Dierenverzorgerprompt = "";
-            string DierenverzorgerErrormsg = "";
-            List<string> MenukeuzesDierenverzorger = new List<string>()
+            Testclass.TestSQL();
+            
+            bool mainloop = true;
+            while (mainloop)
             {
-                "Begin aan jou werkschema.",
-                "Dieren Inzien/Bewerken.",
-                "Verblijven inzien/Bewerken."
-            };
-
-            List<Func<bool>> MenuFuncDierenverzorger = new List<Func<bool>>()
-            {
-                
-            };
-            Interfaceprogram Dierenverzorgerinterface = new Interfaceprogram(MenuFuncDierenverzorger,MenukeuzesDierenverzorger,DierenverzorgerErrormsg,Dierenverzorgerprompt);
-            //maakt een list van alle users
-            List<string> naamenfunctie = new List<string>();
-            foreach (Werknemer werknemer in werknemers)
-            {
-                string naamfunctie = $"{werknemer.Naam}             {werknemer.Functie}";
-                naamenfunctie.Add(werknemer.Naam);
-            }
-            //checkt de functie van de gebruiker en geeft het correcte vervolg interface
-            List<Func<bool>> Loginfunc = new List<Func<bool>>();
-            foreach (Werknemer werknemer in werknemers)
-            {
-                switch (werknemer.Functie)
+                Console.WriteLine("Welkom bij de mierentuin" +
+                                  "\n Selecteer uw functie");
+                Console.WriteLine("0. Stop het programma\n" +
+                                  "1. Dieren verzorger\n" +
+                                  "2. Verblijfs vezorger\n" +
+                                  "3. Manager Dieren verzorger\n" +
+                                  "4. Manager Verblijfs verzorger\n");
+                Console.WriteLine("Typ het getal voor uw keuze");
+                string choice = Console.ReadLine();
+                switch (choice)
                 {
-                    case "verblijfmedewerker":
-                        Verblijfsmedewerkerinterface.Werknemer = werknemer;
-                        Loginfunc.Add(Verblijfsmedewerkerinterface.Startinterface);
+                    case "1" :
+                        bool dierenverzorgermenu = true;
+                        while (dierenverzorgermenu)
+                        {
+                            Console.WriteLine("U bent ingelogd als dierenverzorgd");
+                            Console.WriteLine("0. ga terug\n" +
+                                              "1. dieren\n" +
+                                              "2. verblijven\n");
+                            Console.WriteLine("Typ het getal voor u keuze");
+                            choice = Console.ReadLine();
+                            switch (choice)
+                            {
+                                case "0" :
+                                    dierenverzorgermenu = false;
+                                    break;
+                                case "1" :
+                                    bool diermenu = true;
+                                    while (diermenu)
+                                    {
+                                        Console.WriteLine("0. Ga terug\n" +
+                                                          "1. Voeg een nieuw dier toe\n" +
+                                                          "2. Maak een notitie voor een dier\n");
+                                        Console.WriteLine("Typ het getal voor u keuze");
+                                        choice = Console.ReadLine();
+                                        switch (choice)
+                                        {
+                                            case "0":
+                                                diermenu = false;
+                                                break;
+                                            case "1":
+                                                //usecase ayman
+
+                                                #region aymanusecase
+                                                // Vraag naam van het dier
+                                                bool invoercorrect = false;
+                                                while (!invoercorrect)
+                                                {
+                                                        Console.WriteLine("Voer de naam van het dier in:");
+                                                        string naam = Console.ReadLine();
+
+                                                        // Vraag type dier
+                                                        Console.WriteLine("Voer het type dier in:");
+                                                        string typedier = Console.ReadLine();
+
+                                                        // Vraag notitie inclusief verblijf
+                                                        Console.WriteLine(
+                                                            "Voer een notitie in.");
+                                                        string notitie = Console.ReadLine();
+
+                                                        if (naam.Length != 0 && typedier.Length != 0)
+                                                        {
+                                                            // Maak nieuw Dier object aan
+                                                            Dier nieuwdier = new Dier(naam, notitie, typedier, 1);
+
+                                                            // Voeg dier toe aan database
+                                                            DALSQL.Adddata(nieuwdier);
+
+                                                            Console.WriteLine("Het dier is succesvol aangemeld.");
+                                                            invoercorrect = true;
+                                                        }
+                                                        else
+                                                        {
+                                                            Console.WriteLine("u heeft bij typedier of naam niks ingevuld");
+                                                        }
+                                                }
+                                                #endregion
+                                                break;
+                                            case "2":
+                                                //usecase sam
+
+                                                
+                                                bool dierselecteermenu = true;
+                                                //selecteer een dier en voeg een notitie 
+                                                while (dierselecteermenu)
+                                                {
+                                                    Console.WriteLine(
+                                                        "Selecteer het dier waarbij u een notitie wil maken");
+                                                    int keuegetal = 1;
+                                                    foreach (Dier dier in dierenSQL)
+                                                    {
+                                                        Console.WriteLine($"{keuegetal}. {dier.Naam} {dier.Typedier} {dier.Notitie}");
+                                                        keuegetal++;
+                                                    }
+
+                                                    Console.WriteLine(
+                                                        "typ het getal voor het dier wat u wil selecteren");
+                                                    //try catch block om format fouten af te vangen
+                                                    try
+                                                    {
+                                                        string invoer = Console.ReadLine();
+                                                        int intinvoer = int.Parse(invoer);
+                                                        if (intinvoer - 1 <= dierenSQL.Count && intinvoer - 1 >= 0)
+                                                        {
+                                                            Console.WriteLine("typ nu uw notitie");
+                                                            dierenSQL[intinvoer - 1].Notitie = Console.ReadLine();
+                                                            DALSQL.Adddata(dierenSQL[intinvoer - 1]);
+                                                            Console.WriteLine("notitie opgeslagen");
+                                                            dierselecteermenu = false;
+                                                        }
+                                                    }
+                                                    catch (FormatException)
+                                                    {
+                                                        Console.WriteLine("invoer past niet binnen de gegeven keuzes");
+                                                    }
+                                                }
+                                                break;
+                                            default:
+                                                Console.WriteLine("invoer onjuist probeer opnieuw.");
+                                                break;
+                                        }
+                                    }
+                                    break;
+                                case "2" :
+                                    Console.WriteLine("Niet ontwikkeld voor project");
+                                    break;
+                                default:
+                                    Console.WriteLine("invoer onjuist probeer opnieuw.");
+                                    break;
+                            }
+                        }
                         break;
-                    case "verblijfsmagager":
-                        Verblijfsmagagerinterface.Werknemer = werknemer;
-                        Loginfunc.Add(Verblijfsmagagerinterface.Startinterface);
+                    case "2":
+                        bool verblijfsverzorgermenu = true;
+                        while (verblijfsverzorgermenu)
+                        {
+                            Console.WriteLine("Niet ontwikkeld voor project");
+                            verblijfsverzorgermenu = false;
+                        }
                         break;
-                    case "Dierenverzorger":
-                        Dierenverzorgerinterface.Werknemer = werknemer;
-                        Loginfunc.Add(Dierenverzorgerinterface.Startinterface);
+                    case "3":
+                        bool managerverblijfverzorgermenu = true;
+                        while (managerverblijfverzorgermenu)
+                        {
+                            Console.WriteLine("Niet ontwikkeld voor project");
+                            managerverblijfverzorgermenu = false;
+                        }
                         break;
-                    case "MamagerDierenverzorgers":
-                        ManagerDierenverzorgerinterface.Werknemer = werknemer;
-                        Loginfunc.Add(ManagerDierenverzorgerinterface.Startinterface);
+                    case "4":
+                        bool managerdierenverzorgermenu = true;
+                        while (managerdierenverzorgermenu)
+                        {
+                            Console.WriteLine("Niet ontwikkeld voor project");
+                            managerdierenverzorgermenu = false;
+                        }
+                        break;
+                    case "0":
+                        mainloop = false;
+                        break;
+                    default:
+                        Console.WriteLine("invoer onjuist probeer opnieuw.");
                         break;
                 }
             }
-
-            Interfaceprogram Loginmenu = new Interfaceprogram(NotLoggedIn, Loginfunc, naamenfunctie,
-                "Typ een getal wat binnen de gegeven waarden valt",
-                "Typ het getal wat voor de gebruiker staat waarmee u wil inloggen:");
-            Interfaceprogram Terug = Loginmenu;
-            Loginmenu.Startinterface();
-
-
-
-
         }
     }
 }

@@ -63,13 +63,14 @@ namespace casus.Mierentuin.Models
                 }
             }
 
+            this.Werknemers = new List<Werknemer>();
             foreach (Werknemer werknemer in DALSQL.GetAllWerknemers())
             {
                 foreach (int werknemerID in werknemerids)
                 {
                     if (werknemer.Werknemerid == werknemerID)
                     {
-                        Werknemers.Add(werknemer);
+                        this.Werknemers.Add(werknemer);
                     }
                 }
             }

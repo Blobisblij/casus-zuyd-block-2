@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using casus.Mierentuin.DataAccess;
 
 namespace casus.Mierentuin.Models
 {
@@ -24,6 +25,20 @@ namespace casus.Mierentuin.Models
             Console.WriteLine("under construction\n\n\n\n\n\n\n\n");
             schermterug();
             return true;
+        }
+
+        public static void TestSQL()
+        {
+            Console.WriteLine("dieren");
+            List<Dier> dieren = DALSQL.GetAllDieren();
+            Console.WriteLine("werknemers");
+            List<Werknemer> werknemers = DALSQL.GetAllWerknemers();
+            Console.WriteLine("verblijven");
+            List<Verblijf> verblijven = DALSQL.GetAllVerblijf();
+            Console.WriteLine("voerbeurten");
+            List<VoerBeurt> voerbeurten = DALSQL.GetAllVoerbeurt();
+            Console.WriteLine("schoonmaakbeurten");
+            List<SchoonMaakBeurt> schoonMaakBeurten = DALSQL.GetAllSchoonMaakBeurt();
         }
     }
 }
