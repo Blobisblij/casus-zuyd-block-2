@@ -1,6 +1,7 @@
 ﻿using casus.Mierentuin.Models;
 using System.Runtime.CompilerServices;
 using casus.Mierentuin.DataAccess;
+using System.Linq.Expressions;
 
 namespace casus.Mierentuin
 {
@@ -27,10 +28,10 @@ namespace casus.Mierentuin
                 Console.WriteLine("Welkom bij de mierentuin" +
                                   "\n Selecteer uw functie");
                 Console.WriteLine("0. Stop het programma\n" +
-                                  "1. Dieren verzorger\n" +
-                                  "2. Verblijfs vezorger\n" +
-                                  "3. Manager Dieren verzorger\n" +
-                                  "4. Manager Verblijfs verzorger\n");
+                                  "1. Dierenverzorger\n" +
+                                  "2. Verblijfsvezorger\n" +
+                                  "3. Manager Dierenverzorger\n" +
+                                  "4. Manager Verblijfsverzorger\n");
                 Console.WriteLine("Typ het getal voor uw keuze");
                 string choice = Console.ReadLine();
                 switch (choice)
@@ -39,7 +40,7 @@ namespace casus.Mierentuin
                         bool dierenverzorgermenu = true;
                         while (dierenverzorgermenu)
                         {
-                            Console.WriteLine("U bent ingelogd als dierenverzorgd");
+                            Console.WriteLine("U bent ingelogd als dierenverzorger");
                             Console.WriteLine("0. ga terug\n" +
                                               "1. dieren\n" +
                                               "2. verblijven\n");
@@ -112,11 +113,11 @@ namespace casus.Mierentuin
                                                 {
                                                     Console.WriteLine(
                                                         "Selecteer het dier waarbij u een notitie wil maken");
-                                                    int keuegetal = 1;
+                                                    int keuzegetal = 1;
                                                     foreach (Dier dier in dierenSQL)
                                                     {
-                                                        Console.WriteLine($"{keuegetal}. {dier.Naam} {dier.Typedier} {dier.Notitie}");
-                                                        keuegetal++;
+                                                        Console.WriteLine($"{keuzegetal}. {dier.Naam} {dier.Typedier} {dier.Notitie}");
+                                                        keuzegetal++;
                                                     }
 
                                                     Console.WriteLine(
@@ -148,7 +149,36 @@ namespace casus.Mierentuin
                                     }
                                     break;
                                 case "2" :
-                                    Console.WriteLine("Niet ontwikkeld voor project");
+                                    try
+                                    {
+                                        int getalkeuze = 1;
+                                    Console.WriteLine("Welk verblijf wilt u inzien");
+                                    foreach (Verblijf verblijf in verblijfSQL)
+                                    {
+                                        Console.WriteLine($"{getalkeuze}. {verblijf.Naam} ");
+                                        getalkeuze++;
+                                    }
+                                    Console.WriteLine(
+                                                        "typ het getal voor het dier wat u wil selecteren");
+
+                                        string invoer = Console.ReadLine();
+                                        int intinvoer = int.Parse(invoer);
+                                        if (intinvoer - 1 <= verblijfSQL.Count && intinvoer - 1 >= 0)
+                                        {
+
+                                            Console.WriteLine($"Naam: {verblijfSQL[intinvoer - 1].Naam}\r\nBeschrijving: {verblijfSQL[intinvoer - 1].Beschrijving}\r\nIs de poort open: {verblijfSQL[intinvoer - 1].PoortOpen}");
+                                            Console.WriteLine();
+                                            foreach (Dier dier in verblijfSQL[intinvoer - 1].DiereninVerblijf)
+                                            {
+                                                Console.WriteLine($"{dier.Naam} - {dier.Typedier} - {dier.Notitie}");
+                                            }
+                                        }
+                                    }
+                                    catch
+                                    {
+                                        Console.WriteLine("invoer past niet binnen de gegeven keuzes");
+                                    }
+
                                     break;
                                 default:
                                     Console.WriteLine("invoer onjuist probeer opnieuw.");
