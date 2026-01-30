@@ -60,7 +60,6 @@ namespace casus.Mierentuin.DataAccess
                         string DierType = reader.GetString(1);
                         string Notitie = reader.GetString(4);
                         Dier Dier = new Dier(Dierid, Naam, Notitie, DierType, VerblijfID);
-                        Console.WriteLine($"{Dierid} - {DierType} - {Notitie}");
                         Dierlist.Add(Dier);
                     }
                 }

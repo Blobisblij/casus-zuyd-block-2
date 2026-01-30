@@ -15,9 +15,12 @@ namespace casus.Mierentuin
             List<VoerBeurtWerknemer> voerBeurtWerknemersSQL = DALSQL.GetAllVoerbeurtWerknemer();
             List<SchoonMaakBeurt> schoonMaakBeurtSQL = DALSQL.GetAllSchoonMaakBeurt();
             List<SchoonmaakWerknemer> schoonmaakWerknemerSQL = DALSQL.GetAllSchoonmaakWerknemer();
-            
-            Testclass.TestSQL();
-            
+            bool doetest = false;
+            if (doetest)
+            {
+                Testclass.TestSQL();
+            }
+
             bool mainloop = true;
             while (mainloop)
             {

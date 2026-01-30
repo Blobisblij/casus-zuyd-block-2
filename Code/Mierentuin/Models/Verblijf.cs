@@ -16,6 +16,7 @@ namespace casus.Mierentuin.Models
 
         public Verblijf(string Naam, string Beschrijving)
         {
+            this.DiereninVerblijf = new List<Dier>();
             this.Naam = Naam;
             this.Beschrijving = Beschrijving;
             PoortOpen = false;

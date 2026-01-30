@@ -31,14 +31,26 @@ namespace casus.Mierentuin.Models
         {
             Console.WriteLine("dieren");
             List<Dier> dieren = DALSQL.GetAllDieren();
+            Console.WriteLine("dieren voltooid");
             Console.WriteLine("werknemers");
             List<Werknemer> werknemers = DALSQL.GetAllWerknemers();
+            Console.WriteLine("werknemers voltooid");
             Console.WriteLine("verblijven");
             List<Verblijf> verblijven = DALSQL.GetAllVerblijf();
+            Console.WriteLine("verblijven voltooid");
             Console.WriteLine("voerbeurten");
             List<VoerBeurt> voerbeurten = DALSQL.GetAllVoerbeurt();
+            Console.WriteLine("voerbeurten voltooid");
             Console.WriteLine("schoonmaakbeurten");
             List<SchoonMaakBeurt> schoonMaakBeurten = DALSQL.GetAllSchoonMaakBeurt();
+            Console.WriteLine("schoonmaakbeurten voltooid");
+            Console.WriteLine("Door alle SQL Lees testen heen");
+            Console.WriteLine("start SQL schrijftest");
+            DALSQL.Adddata(dieren[1]);
+            Console.WriteLine("dier schijven werkt");
+            DALSQL.Adddata(verblijven[1]);
+            Console.WriteLine("verblijven werkt");
+            Console.WriteLine("door schrijf test");
         }
     }
 }
